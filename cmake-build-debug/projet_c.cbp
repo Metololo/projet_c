@@ -74,6 +74,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="E:/projets git/projet_c/audio_func.c">
+			<Option target="projet_c"/>
+		</Unit>
+		<Unit filename="E:/projets git/projet_c/audio_func.h">
+			<Option target="projet_c"/>
+		</Unit>
 		<Unit filename="E:/projets git/projet_c/main.c">
 			<Option target="projet_c"/>
 		</Unit>

@@ -128,6 +128,30 @@ projet_c/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/build
 .PHONY : projet_c/fast
 
+audio_func.obj: audio_func.c.obj
+.PHONY : audio_func.obj
+
+# target to build an object file
+audio_func.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/audio_func.c.obj
+.PHONY : audio_func.c.obj
+
+audio_func.i: audio_func.c.i
+.PHONY : audio_func.i
+
+# target to preprocess a source file
+audio_func.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/audio_func.c.i
+.PHONY : audio_func.c.i
+
+audio_func.s: audio_func.c.s
+.PHONY : audio_func.s
+
+# target to generate assembly for a file
+audio_func.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/audio_func.c.s
+.PHONY : audio_func.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -161,6 +185,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... projet_c
+	@echo ... audio_func.obj
+	@echo ... audio_func.i
+	@echo ... audio_func.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

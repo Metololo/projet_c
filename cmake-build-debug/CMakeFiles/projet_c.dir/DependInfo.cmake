@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "E:/projets git/projet_c/audio_func.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/audio_func.c.obj"
   "E:/projets git/projet_c/main.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/main.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

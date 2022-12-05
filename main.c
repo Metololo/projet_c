@@ -14,7 +14,7 @@ int main() {
     ma_result soundResult;
     ma_sound sound; // Use to play sounds and manage them.
 
-    time_t startTime; // Store the time when the sound started
+    time_t startTime = 0; // Store the time when the sound started
     time_t pauseTime = 0; // time when sound paused
     time_t totalPauseTime = 0; // total pause time
 
@@ -37,14 +37,22 @@ int main() {
     soundStart(&sound, &startTime);
     char c = 'a';
     getchar();
-    printf("%lld", pauseTime);
-    soundPause(&sound,&pauseTime);
-    getchar();
-    printf("%lld", pauseTime);
-    soundStart(&sound,&startTime);
+    soundSetVolume(&sound,VOLUME_UP);
     getchar();
     fflush(stdin);
-    printf("%lld", pauseTime);
+    soundSetVolume(&sound,VOLUME_DOWN);
+
+    getchar();
+    fflush(stdin);
+    soundSetVolume(&sound,VOLUME_DOWN);
+
+    getchar();
+    fflush(stdin);
+    soundSetVolume(&sound,VOLUME_UP);
+
+    getchar();
+    fflush(stdin);
+    soundSetVolume(&sound,VOLUME_DOWN);
     getchar();
 
 

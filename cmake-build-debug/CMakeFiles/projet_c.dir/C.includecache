@@ -6,15 +6,17 @@
 
 #IncludeRegexTransform: 
 
-E:/projets git/projet_c/audio_func.c
+E:/projets git/projet_c/audio_func.h
+
+E:/projets git/projet_c/main.c
 stdio.h
--
-stdlib.h
 -
 time.h
 -
 miniaudio.h
 E:/projets git/projet_c/miniaudio.h
+audio_func.h
+E:/projets git/projet_c/audio_func.h
 
 E:/projets git/projet_c/miniaudio.h
 miniaudio.h

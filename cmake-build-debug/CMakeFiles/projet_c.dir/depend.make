@@ -3,6 +3,7 @@
 
 CMakeFiles/projet_c.dir/audio_func.c.obj: \
  ../audio_func.c \
+ ../audio_func.h \
  ../miniaudio.h
 CMakeFiles/projet_c.dir/main.c.obj: \
  ../audio_func.h \

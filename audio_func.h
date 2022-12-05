@@ -24,3 +24,7 @@ void soundPause(ma_sound *sound, time_t *pause);
 // Pause a sound, and actualize the pause Time.
 void soundPlay(ma_sound *sound,time_t *pauseTime,time_t *totalPause);
 
+// -- soundSetVolume --
+// iejcaziuejca
+void soundSetVolume(ma_sound *sound,int volumeAction);
+

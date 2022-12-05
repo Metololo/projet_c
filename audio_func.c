@@ -9,11 +9,11 @@
 #include "miniaudio.h"
 
 
-int soundGetTimer(time_t start,time_t pause){
+int soundGetTimer(time_t start,time_t totalPause){
     time_t actualTime;
     time(&actualTime);
 
-    return (int) (actualTime - start - pause);
+    return (int) (actualTime - start - totalPause);
 }
 
 void soundStart(ma_sound *sound, time_t *startTime){
@@ -26,11 +26,12 @@ void soundPause(ma_sound *sound, time_t *pause){
     ma_sound_stop(sound);
 }
 
-void soundPlay(ma_sound *sound,time_t *pauseTime,time_t *pause){
+void soundPlay(ma_sound *sound,time_t *pauseTime,time_t *totalPause){
+    ma_sound_start(sound);
     time_t tempTime;
     time(&tempTime);
-    ma_sound_start(sound);
-    *pause = tempTime - *pause;
+    *totalPause += (tempTime - *pauseTime);
+
 
 
 }

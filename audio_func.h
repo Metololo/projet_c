@@ -22,5 +22,5 @@ void soundPause(ma_sound *sound, time_t *pause);
 
 // -- soundStart --
 // Pause a sound, and actualize the pause Time.
-void soundPlay(ma_sound *sound,time_t *pause);
+void soundPlay(ma_sound *sound,time_t *pauseTime,time_t *totalPause);
 

@@ -11,7 +11,7 @@
 
 // -- soundTimer --
 // This function return the time passed of a sound from the value start ( start should be the time in seconds where the sound started )
-int soundGetTimer(time_t start,time_t pause);
+float soundGetTimer(time_t start,time_t pause);
 
 // -- soundStart --
 // Start playing a sound, and initializing the time in seconds when the sounds started
@@ -26,6 +26,11 @@ void soundPause(ma_sound *sound, time_t *pause);
 void soundPlay(ma_sound *sound,time_t *pauseTime,time_t *totalPause);
 
 // -- soundSetVolume --
-// iejcaziuejca
+// change de volume of the sound
+// VOLUME_UP or 1 to make it sound higher
+// VOLUME_DOWN or 0 to make it sound lower
 void soundSetVolume(ma_sound *sound,int volumeAction);
 
+// -- soundFormatTime
+// -- convert a float time in seconds to a string with format : "MM:SS" ( ex 125 seconds -> 02:05 )
+void soundFormatTime(char *string,int size,float time);

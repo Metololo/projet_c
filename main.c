@@ -18,7 +18,13 @@ int main() {
     time_t pauseTime = 0; // time when sound paused
     time_t totalPauseTime = 0; // total pause time
 
-    int soundDuration = 0;
+    float soundDuration = 0;
+
+    int choice;
+    char timeNow[50];
+    char duration[50];
+
+    float timer;
 
     result = ma_engine_init(NULL,&engine); // Start the engine
     if(result != MA_SUCCESS){
@@ -30,9 +36,7 @@ int main() {
     if (soundResult != MA_SUCCESS) {
         return soundResult;
     }
-    int choice;
-    char timecode[50];
-    char duration[50];
+
 
     do {
         printf("Bonjour !\n");
@@ -44,22 +48,15 @@ int main() {
         printf("4. Monter le volume\n");
         printf("5. Baisser le volume\n");
         printf("6. Stopper le son\n");
-        // struct tm pTime = (startTime, totalPauseTime);
-        // strftime(timecode,50,"%H:%M:%S", pTime);
-        float bl= (float) soundGetTimer(startTime,totalPauseTime);
-        char buffer1[80];
-        time_t total2 = (time_t) bl;
-        struct tm *pTime1 = localtime(&total2);
-        strftime(buffer1,80,"%M:%S",pTime1);
 
-        printf("Timecode : %s\n",buffer1 );
-        float total;
-        ma_sound_get_length_in_seconds(&sound,&total);
-        char buffer[80];
-        time_t total1 = (time_t) total;
-        struct tm *pTime = localtime(&total1);
-        strftime(buffer,80,"%M:%S",pTime);
-        printf("Duree totale du son : %s\n", buffer);
+        timer = soundGetTimer(startTime,totalPauseTime);
+        soundFormatTime(timeNow,50,timer);
+        printf("Timecode : %s\n",timeNow);
+
+        ma_sound_get_length_in_seconds(&sound,&soundDuration);
+        soundFormatTime(duration,50,soundDuration);
+        printf("Duree total du son : %s\n",duration);
+
         scanf("%d", &choice);
 
         switch (choice) {

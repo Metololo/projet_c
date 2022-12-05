@@ -12,11 +12,11 @@
 #include "audio_func.h"
 
 
-int soundGetTimer(time_t start,time_t totalPause){
+float soundGetTimer(time_t start,time_t totalPause){
     time_t actualTime;
     time(&actualTime);
 
-    return (int) (actualTime - start - totalPause);
+    return (float) (actualTime - start - totalPause);
 }
 
 void soundStart(ma_sound *sound, time_t *startTime){
@@ -35,6 +35,12 @@ void soundPlay(ma_sound *sound,time_t *pauseTime,time_t *totalPause){
     time(&tempTime);
     *totalPause += (tempTime - *pauseTime);
 
+}
+
+void soundFormatTime(char *string,int size,float time){
+    time_t timeTemp = (time_t) time;
+    struct tm *pTime = localtime(&timeTemp);
+    strftime(string,size,"%M:%S",pTime);
 }
 
 

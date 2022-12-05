@@ -25,36 +25,70 @@ int main() {
         return result;
     }
 
-
     //This function init a sound from pathfile ( doesn't play it ).
     soundResult = ma_sound_init_from_file(&engine, "music.mp3", 0, NULL, NULL, &sound);
     if (soundResult != MA_SUCCESS) {
         return soundResult;
     }
-    printf("Press enter to start playing...");
-    getchar();
-    fflush(stdin);
-    soundStart(&sound, &startTime);
-    char c = 'a';
-    getchar();
-    soundSetVolume(&sound,VOLUME_UP);
-    getchar();
-    fflush(stdin);
-    soundSetVolume(&sound,VOLUME_DOWN);
+    int choice;
+    char timecode[50];
+    char duration[50];
 
-    getchar();
-    fflush(stdin);
-    soundSetVolume(&sound,VOLUME_DOWN);
+    do {
+        printf("Bonjour !\n");
+        printf("Que souhaitez-vous faire ?\n");
+        printf("1. Lancer le son\n");
+        printf("2. Mettre en pause le son\n");
+        printf("3. Mettre en lecture le son\n");
+        printf("Volume actuel : %d\n", (int) (ma_sound_get_volume(&sound)*10));
+        printf("4. Monter le volume\n");
+        printf("5. Baisser le volume\n");
+        printf("6. Stopper le son\n");
+        // struct tm pTime = (startTime, totalPauseTime);
+        // strftime(timecode,50,"%H:%M:%S", pTime);
+        float bl= (float) soundGetTimer(startTime,totalPauseTime);
+        char buffer1[80];
+        time_t total2 = (time_t) bl;
+        struct tm *pTime1 = localtime(&total2);
+        strftime(buffer1,80,"%M:%S",pTime1);
 
-    getchar();
-    fflush(stdin);
-    soundSetVolume(&sound,VOLUME_UP);
+        printf("Timecode : %s\n",buffer1 );
+        float total;
+        ma_sound_get_length_in_seconds(&sound,&total);
+        char buffer[80];
+        time_t total1 = (time_t) total;
+        struct tm *pTime = localtime(&total1);
+        strftime(buffer,80,"%M:%S",pTime);
+        printf("Duree totale du son : %s\n", buffer);
+        scanf("%d", &choice);
 
-    getchar();
-    fflush(stdin);
-    soundSetVolume(&sound,VOLUME_DOWN);
-    getchar();
+        switch (choice) {
+            case 1:
+                soundStart(&sound, &startTime);
+                break;
 
+            case 2:
+                soundPause(&sound, &pauseTime);
+                break;
+
+            case 3:
+                soundPlay(&sound, &pauseTime, &totalPauseTime);
+                break;
+
+            case 4:
+                soundSetVolume(&sound, VOLUME_UP);
+                break;
+
+            case 5:
+                soundSetVolume(&sound, VOLUME_DOWN);
+                break;
+
+            case 6:
+                totalPauseTime = 0;
+                ma_sound_uninit(&sound);
+                break;
+        }
+    } while (choice != 0);
 
     ma_engine_uninit(&engine);
 

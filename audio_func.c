@@ -3,13 +3,13 @@
 //  This file contains many functions used to manage audio for this project :
 // Play,Pause,Stop a sound. Change the volume, get duration, current timecode ...
 
-#define VOLUME_UP 1
-#define VOLUME_DOWN 0
+
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "miniaudio.h"
+#include "audio_func.h"
 
 
 int soundGetTimer(time_t start,time_t totalPause){
@@ -37,20 +37,22 @@ void soundPlay(ma_sound *sound,time_t *pauseTime,time_t *totalPause){
 
 }
 
+
 void soundSetVolume(ma_sound *sound,int volumeAction){
-    if(volumeAction != 1 && volumeAction != 2){
+    if(volumeAction != 1 && volumeAction != 0){
         printf("ERROR, wrong volume parameter");
         return;
     }
     double soundVolume;
-    soundVolume = ma_sound_get_volume(sound); // Give volume ( 0 - 1)
+    soundVolume = (double) ma_sound_get_volume(sound); // Give volume ( 0 - 1)
+    printf("%lf",soundVolume);
     switch (volumeAction) {
         case VOLUME_UP:
-            soundVolume += 0.1;
+            soundVolume += 0.2;
             ma_sound_set_volume(sound, (float)soundVolume);
             break;
         case VOLUME_DOWN:
-            soundVolume -= 0.1;
+            soundVolume -= 0.2;
             ma_sound_set_volume(sound,(float)soundVolume);
             break;
 

@@ -4,7 +4,8 @@
 
 #ifndef PROJET_C_AUDIO_FUNC_H
 #define PROJET_C_AUDIO_FUNC_H
-
+#define VOLUME_UP 1
+#define VOLUME_DOWN 0
 #endif //PROJET_C_AUDIO_FUNC_H
 
 

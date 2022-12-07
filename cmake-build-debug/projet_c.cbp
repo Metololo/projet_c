@@ -24,6 +24,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="E:/wamp64/bin/mariadb/mariadb10.6.5/include"/>
 					<Add directory="E:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
 					<Add directory="E:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
 					<Add directory="E:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
@@ -42,6 +43,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="E:/wamp64/bin/mariadb/mariadb10.6.5/include"/>
 					<Add directory="E:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
 					<Add directory="E:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
 					<Add directory="E:/mingw64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
@@ -78,6 +80,15 @@
 			<Option target="projet_c"/>
 		</Unit>
 		<Unit filename="E:/projets git/projet_c/audio_func.h">
+			<Option target="projet_c"/>
+		</Unit>
+		<Unit filename="E:/projets git/projet_c/db_func.c">
+			<Option target="projet_c"/>
+		</Unit>
+		<Unit filename="E:/projets git/projet_c/db_func.h">
+			<Option target="projet_c"/>
+		</Unit>
+		<Unit filename="E:/projets git/projet_c/dbconf.h">
 			<Option target="projet_c"/>
 		</Unit>
 		<Unit filename="E:/projets git/projet_c/main.c">

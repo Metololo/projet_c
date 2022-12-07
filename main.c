@@ -1,14 +1,52 @@
 #define MINIAUDIO_IMPLEMENTATION
 #include <stdio.h>
 #include <time.h>
+#include <winsock.h>
+#include <string.h>
+#include <mysql/mysql.h>
 #include "miniaudio.h"
 #include "audio_func.h"
-
-
-
+#include "dbconf.h"
+#include "db_func.h"
 int main() {
 
-    ma_result result;
+
+    MYSQL *mysql = NULL;
+
+    //dbCreate(mysql);
+
+    FILE *fp = NULL;
+    fp = fopen("../settings/config.txt","rt");
+    if(fp == NULL){
+        printf("PAS BON");
+    }
+
+    char option[100];
+    if(getSetting(option,"premium")){
+        printf("Option premium : %s\n",option);
+    }else{
+        printf("NON TROUVE\n");
+    }
+
+
+    if(getSetting(option,"defaultVolume")){
+        printf("Option defaultVolume : %s\n",option);
+    }else{
+        printf("NON TROUVE\n");
+    }
+
+    if(getSetting(option,"testcaca")){
+        printf("Option testcaca : %s\n",option);
+    }else{
+        printf("Option testcaca NON TROUVE\n");
+    }
+
+
+
+
+
+
+  /*  ma_result result;
     ma_engine engine; // Declare the engine used to play sound
 
     ma_result soundResult;
@@ -87,7 +125,7 @@ int main() {
         }
     } while (choice != 0);
 
-    ma_engine_uninit(&engine);
+    ma_engine_uninit(&engine);*/
 
     return 0;
 }

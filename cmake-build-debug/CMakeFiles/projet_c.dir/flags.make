@@ -4,7 +4,7 @@
 # compile C with E:/mingw64/mingw64/bin/gcc.exe
 C_DEFINES = 
 
-C_INCLUDES = 
+C_INCLUDES = @CMakeFiles/projet_c.dir/includes_C.rsp
 
 C_FLAGS = -g -std=gnu99
 

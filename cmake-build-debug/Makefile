@@ -152,6 +152,30 @@ audio_func.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/audio_func.c.s
 .PHONY : audio_func.c.s
 
+db_func.obj: db_func.c.obj
+.PHONY : db_func.obj
+
+# target to build an object file
+db_func.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/db_func.c.obj
+.PHONY : db_func.c.obj
+
+db_func.i: db_func.c.i
+.PHONY : db_func.i
+
+# target to preprocess a source file
+db_func.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/db_func.c.i
+.PHONY : db_func.c.i
+
+db_func.s: db_func.c.s
+.PHONY : db_func.s
+
+# target to generate assembly for a file
+db_func.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/db_func.c.s
+.PHONY : db_func.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -188,6 +212,9 @@ help:
 	@echo ... audio_func.obj
 	@echo ... audio_func.i
 	@echo ... audio_func.s
+	@echo ... db_func.obj
+	@echo ... db_func.i
+	@echo ... db_func.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

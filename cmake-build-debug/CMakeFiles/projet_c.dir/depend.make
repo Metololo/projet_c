@@ -5,7 +5,24 @@ CMakeFiles/projet_c.dir/audio_func.c.obj: \
  ../audio_func.c \
  ../audio_func.h \
  ../miniaudio.h
+CMakeFiles/projet_c.dir/db_func.c.obj: \
+ ../db_func.c \
+ ../dbconf.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/ma_list.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_com.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_version.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mysql.h
 CMakeFiles/projet_c.dir/main.c.obj: \
  ../audio_func.h \
+ ../db_func.h \
+ ../dbconf.h \
  ../main.c \
- ../miniaudio.h
+ ../miniaudio.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/ma_list.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_com.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_version.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mysql.h

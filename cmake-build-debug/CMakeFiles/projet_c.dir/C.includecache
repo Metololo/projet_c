@@ -8,15 +8,29 @@
 
 E:/projets git/projet_c/audio_func.h
 
+E:/projets git/projet_c/db_func.h
+
+E:/projets git/projet_c/dbconf.h
+
 E:/projets git/projet_c/main.c
 stdio.h
 -
 time.h
 -
+winsock.h
+-
+string.h
+-
+mysql/mysql.h
+-
 miniaudio.h
 E:/projets git/projet_c/miniaudio.h
 audio_func.h
 E:/projets git/projet_c/audio_func.h
+dbconf.h
+E:/projets git/projet_c/dbconf.h
+db_func.h
+E:/projets git/projet_c/db_func.h
 
 E:/projets git/projet_c/miniaudio.h
 miniaudio.h
@@ -229,4 +243,34 @@ wchar.h
 -
 errno.h
 -
+
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/ma_list.h
+
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_com.h
+
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h
+ctype.h
+-
+
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h
+
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_version.h
+custom_conf.h
+-
+
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mysql.h
+stdarg.h
+-
+sys/types.h
+-
+mariadb_com.h
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_com.h
+mariadb_version.h
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_version.h
+ma_list.h
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/ma_list.h
+mariadb_ctype.h
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h
+mariadb_stmt.h
+E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h
 

@@ -2,7 +2,7 @@
 //  Created by Samy on 05/12/2022.
 //  This file contains many functions used to manage audio for this project :
 // Play,Pause,Stop a sound. Change the volume, get duration, current timecode ...
-
+// You can check more infos about functions in audio_func.h
 
 
 #include <stdio.h>
@@ -52,12 +52,12 @@ void soundSetVolume(ma_sound *sound,int volumeAction){
     double soundVolume;
     soundVolume = (double) ma_sound_get_volume(sound); // Give volume ( 0 - 1)
     printf("%lf",soundVolume);
-    switch (volumeAction) {
-        case VOLUME_UP:
+    switch(volumeAction) {
+        case VOLUME_UP: // 1
             soundVolume += 0.2;
             ma_sound_set_volume(sound, (float)soundVolume);
             break;
-        case VOLUME_DOWN:
+        case VOLUME_DOWN: // 0
             soundVolume -= 0.2;
             ma_sound_set_volume(sound,(float)soundVolume);
             break;

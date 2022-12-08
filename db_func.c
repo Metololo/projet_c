@@ -85,52 +85,7 @@ void dbCreate(MYSQL *mysql){
 
 }
 
-char *getSetting(char *buffer, char *setting){
-    char *position;
-    FILE *conf = NULL;
-    int valueLength = 0;
 
-    conf = fopen("../settings/config.txt","rt");
-    if(conf == NULL){
-        // TODO ? Crée une fonction qui recreer le fichier option en cas de perte
-        return NULL;
-
-    }
-
-    // READ ALL LINE FROM FILE config.txt
-    while(!feof(conf)){
-        fgets(buffer,100,conf);
-
-        if(buffer[0] != '#' && buffer[0] != '\n'){
-           if(buffer[strlen(buffer)-1] == '\n'){
-                buffer[strlen(buffer)-1] = '\0';
-            }
-
-           //If we find the settings, we return his value
-
-            if(strstr(buffer,setting)){
-
-                position = strchr(buffer,':');
-                if(position != NULL){
-
-                    valueLength = (int) strlen(position+1);
-                    char *temp = malloc(sizeof(char)* valueLength);
-                    snprintf(temp,valueLength+1,"%s",position+1);
-
-                    strcpy(buffer,temp);
-
-
-                    free(temp);
-                    fclose(conf);
-                    return buffer;
-                }
-            }
-        }
-    }
-    fclose(conf);
-    return NULL;
-
-}
 
 
 

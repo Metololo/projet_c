@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/projet_c.dir/audio_func.c.obj"
   "CMakeFiles/projet_c.dir/db_func.c.obj"
   "CMakeFiles/projet_c.dir/main.c.obj"
+  "CMakeFiles/projet_c.dir/settings_func.c.obj"
   "libprojet_c.dll.a"
   "projet_c.exe"
   "projet_c.exe.manifest"

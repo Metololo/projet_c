@@ -5,39 +5,21 @@
 #include "audio_func.h"
 #include "dbconf.h"
 #include "db_func.h"
+#include "structures.h"
+#include "settings_func.h"
 int main() {
 
 
     MYSQL *mysql = NULL;
 
-    dbCreate(mysql);
-
-    FILE *fp = NULL;
-    fp = fopen("../settings/config.txt","rt");
-    if(fp == NULL){
-        printf("PAS BON");
-    }
-
-    char option[100];
-    if(getSetting(option,"premium")){
-        printf("Option premium : %s\n",option);
-    }else{
-        printf("NON TROUVE\n");
-    }
+   // dbCreate(mysql);
 
 
-    if(getSetting(option,"defaultVolume")){
-        printf("Option defaultVolume : %s\n",option);
-    }else{
-        printf("NON TROUVE\n");
-    }
+    SETTING *settings = settingsInit();
 
-    if(getSetting(option,"testcaca")){
-        printf("Option testcaca : %s\n",option);
-    }else{
-        printf("Option testcaca NON TROUVE\n");
-    }
+    settingsSet(settings,"defaultVolume","65");
 
+    free(settings);
 
 
 

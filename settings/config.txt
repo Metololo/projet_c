@@ -1,10 +1,6 @@
-#CECI EST UN COMMENTAIRE !!
+#COMMENTAIRE
+defaultVolume:65
+supertestcool
+okmenfou
 
-#Le volume par defaut au lancement de l'app
-defaultVolume:10
-#Le premium à 30 euros par mois
-
-
-#premium:true
-premium:false
-#premium:true
+#rerere

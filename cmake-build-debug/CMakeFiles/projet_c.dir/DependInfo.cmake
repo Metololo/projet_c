@@ -8,15 +8,16 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/PROJETS/projet_c/audio_func.c" "C:/PROJETS/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/audio_func.c.obj"
-  "C:/PROJETS/projet_c/db_func.c" "C:/PROJETS/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/db_func.c.obj"
-  "C:/PROJETS/projet_c/main.c" "C:/PROJETS/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/main.c.obj"
+  "E:/projets git/projet_c/audio_func.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/audio_func.c.obj"
+  "E:/projets git/projet_c/db_func.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/db_func.c.obj"
+  "E:/projets git/projet_c/main.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/main.c.obj"
+  "E:/projets git/projet_c/settings_func.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/settings_func.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
-  "C:/wamp64/bin/mariadb/mariadb10.6.5/include"
+  "E:/wamp64/bin/mariadb/mariadb10.6.5/include"
   )
 
 # The set of dependency files which are needed:

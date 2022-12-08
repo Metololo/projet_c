@@ -43,19 +43,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "E:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E rm -f
+RM = "E:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\PROJETS\projet_c
+CMAKE_SOURCE_DIR = "E:\projets git\projet_c"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\PROJETS\projet_c\cmake-build-debug
+CMAKE_BINARY_DIR = "E:\projets git\projet_c\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/projet_c.dir/depend.make
@@ -68,50 +68,65 @@ include CMakeFiles/projet_c.dir/flags.make
 CMakeFiles/projet_c.dir/main.c.obj: CMakeFiles/projet_c.dir/flags.make
 CMakeFiles/projet_c.dir/main.c.obj: CMakeFiles/projet_c.dir/includes_C.rsp
 CMakeFiles/projet_c.dir/main.c.obj: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\PROJETS\projet_c\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/projet_c.dir/main.c.obj"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\projet_c.dir\main.c.obj -c C:\PROJETS\projet_c\main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="E:\projets git\projet_c\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/projet_c.dir/main.c.obj"
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\projet_c.dir\main.c.obj -c "E:\projets git\projet_c\main.c"
 
 CMakeFiles/projet_c.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/projet_c.dir/main.c.i"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\PROJETS\projet_c\main.c > CMakeFiles\projet_c.dir\main.c.i
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "E:\projets git\projet_c\main.c" > CMakeFiles\projet_c.dir\main.c.i
 
 CMakeFiles/projet_c.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/projet_c.dir/main.c.s"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\PROJETS\projet_c\main.c -o CMakeFiles\projet_c.dir\main.c.s
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\projets git\projet_c\main.c" -o CMakeFiles\projet_c.dir\main.c.s
 
 CMakeFiles/projet_c.dir/audio_func.c.obj: CMakeFiles/projet_c.dir/flags.make
 CMakeFiles/projet_c.dir/audio_func.c.obj: CMakeFiles/projet_c.dir/includes_C.rsp
 CMakeFiles/projet_c.dir/audio_func.c.obj: ../audio_func.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\PROJETS\projet_c\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/projet_c.dir/audio_func.c.obj"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\projet_c.dir\audio_func.c.obj -c C:\PROJETS\projet_c\audio_func.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="E:\projets git\projet_c\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/projet_c.dir/audio_func.c.obj"
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\projet_c.dir\audio_func.c.obj -c "E:\projets git\projet_c\audio_func.c"
 
 CMakeFiles/projet_c.dir/audio_func.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/projet_c.dir/audio_func.c.i"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\PROJETS\projet_c\audio_func.c > CMakeFiles\projet_c.dir\audio_func.c.i
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "E:\projets git\projet_c\audio_func.c" > CMakeFiles\projet_c.dir\audio_func.c.i
 
 CMakeFiles/projet_c.dir/audio_func.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/projet_c.dir/audio_func.c.s"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\PROJETS\projet_c\audio_func.c -o CMakeFiles\projet_c.dir\audio_func.c.s
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\projets git\projet_c\audio_func.c" -o CMakeFiles\projet_c.dir\audio_func.c.s
 
 CMakeFiles/projet_c.dir/db_func.c.obj: CMakeFiles/projet_c.dir/flags.make
 CMakeFiles/projet_c.dir/db_func.c.obj: CMakeFiles/projet_c.dir/includes_C.rsp
 CMakeFiles/projet_c.dir/db_func.c.obj: ../db_func.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\PROJETS\projet_c\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/projet_c.dir/db_func.c.obj"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\projet_c.dir\db_func.c.obj -c C:\PROJETS\projet_c\db_func.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="E:\projets git\projet_c\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/projet_c.dir/db_func.c.obj"
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\projet_c.dir\db_func.c.obj -c "E:\projets git\projet_c\db_func.c"
 
 CMakeFiles/projet_c.dir/db_func.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/projet_c.dir/db_func.c.i"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\PROJETS\projet_c\db_func.c > CMakeFiles\projet_c.dir\db_func.c.i
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "E:\projets git\projet_c\db_func.c" > CMakeFiles\projet_c.dir\db_func.c.i
 
 CMakeFiles/projet_c.dir/db_func.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/projet_c.dir/db_func.c.s"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\PROJETS\projet_c\db_func.c -o CMakeFiles\projet_c.dir\db_func.c.s
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\projets git\projet_c\db_func.c" -o CMakeFiles\projet_c.dir\db_func.c.s
+
+CMakeFiles/projet_c.dir/settings_func.c.obj: CMakeFiles/projet_c.dir/flags.make
+CMakeFiles/projet_c.dir/settings_func.c.obj: CMakeFiles/projet_c.dir/includes_C.rsp
+CMakeFiles/projet_c.dir/settings_func.c.obj: ../settings_func.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="E:\projets git\projet_c\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/projet_c.dir/settings_func.c.obj"
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\projet_c.dir\settings_func.c.obj -c "E:\projets git\projet_c\settings_func.c"
+
+CMakeFiles/projet_c.dir/settings_func.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/projet_c.dir/settings_func.c.i"
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "E:\projets git\projet_c\settings_func.c" > CMakeFiles\projet_c.dir\settings_func.c.i
+
+CMakeFiles/projet_c.dir/settings_func.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/projet_c.dir/settings_func.c.s"
+	E:\mingw64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\projets git\projet_c\settings_func.c" -o CMakeFiles\projet_c.dir\settings_func.c.s
 
 # Object files for target projet_c
 projet_c_OBJECTS = \
 "CMakeFiles/projet_c.dir/main.c.obj" \
 "CMakeFiles/projet_c.dir/audio_func.c.obj" \
-"CMakeFiles/projet_c.dir/db_func.c.obj"
+"CMakeFiles/projet_c.dir/db_func.c.obj" \
+"CMakeFiles/projet_c.dir/settings_func.c.obj"
 
 # External object files for target projet_c
 projet_c_EXTERNAL_OBJECTS =
@@ -119,11 +134,12 @@ projet_c_EXTERNAL_OBJECTS =
 projet_c.exe: CMakeFiles/projet_c.dir/main.c.obj
 projet_c.exe: CMakeFiles/projet_c.dir/audio_func.c.obj
 projet_c.exe: CMakeFiles/projet_c.dir/db_func.c.obj
+projet_c.exe: CMakeFiles/projet_c.dir/settings_func.c.obj
 projet_c.exe: CMakeFiles/projet_c.dir/build.make
 projet_c.exe: CMakeFiles/projet_c.dir/linklibs.rsp
 projet_c.exe: CMakeFiles/projet_c.dir/objects1.rsp
 projet_c.exe: CMakeFiles/projet_c.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\PROJETS\projet_c\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable projet_c.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="E:\projets git\projet_c\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable projet_c.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\projet_c.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -135,6 +151,6 @@ CMakeFiles/projet_c.dir/clean:
 .PHONY : CMakeFiles/projet_c.dir/clean
 
 CMakeFiles/projet_c.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\PROJETS\projet_c C:\PROJETS\projet_c C:\PROJETS\projet_c\cmake-build-debug C:\PROJETS\projet_c\cmake-build-debug C:\PROJETS\projet_c\cmake-build-debug\CMakeFiles\projet_c.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "E:\projets git\projet_c" "E:\projets git\projet_c" "E:\projets git\projet_c\cmake-build-debug" "E:\projets git\projet_c\cmake-build-debug" "E:\projets git\projet_c\cmake-build-debug\CMakeFiles\projet_c.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/projet_c.dir/depend
 

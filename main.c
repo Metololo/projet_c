@@ -1,8 +1,5 @@
 #define MINIAUDIO_IMPLEMENTATION
 #include <stdio.h>
-#include <time.h>
-#include <winsock.h>
-#include <string.h>
 #include <mysql/mysql.h>
 #include "miniaudio.h"
 #include "audio_func.h"
@@ -13,7 +10,7 @@ int main() {
 
     MYSQL *mysql = NULL;
 
-    //dbCreate(mysql);
+    dbCreate(mysql);
 
     FILE *fp = NULL;
     fp = fopen("../settings/config.txt","rt");

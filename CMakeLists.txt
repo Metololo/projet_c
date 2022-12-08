@@ -3,8 +3,8 @@ project(projet_c C)
 
 set(CMAKE_C_STANDARD 99)
 
-include_directories("E:/wamp64/bin/mariadb/mariadb10.6.5/include")
-link_directories("E:/wamp64/bin/mariadb/mariadb10.6.5/lib")
+include_directories("C:/wamp64/bin/mariadb/mariadb10.6.5/include")
+link_directories("C:/wamp64/bin/mariadb/mariadb10.6.5/lib")
 link_libraries(libmariadb)
 
 

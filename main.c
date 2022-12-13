@@ -9,15 +9,9 @@
 #include "settings_func.h"
 int main() {
 
-
-    MYSQL *mysql = NULL;
-
-   // dbCreate(mysql);
-
-
-    SETTING *settings = settingsInit();
-
-    settingsSet(settings,"defaultVolume","65");
+    SETTING *settings;
+    settings = settingsInit();
+    settingsSet(settings,"blabla","bonjourbonuour");
 
     free(settings);
 

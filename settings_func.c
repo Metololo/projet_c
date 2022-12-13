@@ -18,7 +18,9 @@ int settingsGetNumber(){
     char buffer[LINE_MAX_LENGTH];
     int counter = 0;
 
-    // READ ALL LINE FROM FILE config.txt
+    // READ ALL LINE FROM FILE that are formated with :
+    // For exemple : abc:efg will be counter
+    // But abc-hde will not.
     while(!feof(conf)){
         fgets(buffer,LINE_MAX_LENGTH,conf);
         if (buffer[0] != '#' && buffer[0] != '\n') {
@@ -85,6 +87,8 @@ int settingsSet(SETTING *settings,char *param,char *value){
     FILE *tempConf;
     char newLine[LINE_MAX_LENGTH];
     conf = fopen("../settings/config.txt","rt");
+
+    // Create a temporary file where we will copy all config.txt
     tempConf = fopen("../settings/temp_config.txt","wt");
     if(conf == NULL || tempConf == NULL){
         return 0;
@@ -98,7 +102,8 @@ int settingsSet(SETTING *settings,char *param,char *value){
     while(!feof(conf)){
         fgets(buffer,LINE_MAX_LENGTH,conf);
 
-        //printf("%s",buffer);
+                // If we are on the line that we want to change
+                // We puts the newLine instead of copying the current one
                 if(counter == line){
                     sprintf(newLine,"%s:%s\n",param,value);
                     fputs(newLine,tempConf);
@@ -107,6 +112,9 @@ int settingsSet(SETTING *settings,char *param,char *value){
                 }
         ++counter;
     }
+
+    //Remove ancient config.txt and rename temporary file "config.txt"
+
     fclose(conf);
     remove("../settings/config.txt");
     fclose(tempConf);

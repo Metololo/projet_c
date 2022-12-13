@@ -22,12 +22,13 @@ int settingsGetNumber();
 // ( doesn't take commentaries and empty lines in count ).
 /* EXEMPLE :
  *
- * array[0].param = "volume" | array[0].value = "10";
- * array[1].param = "randomMode" | array[1].value = "true"
+ * array[0].param = "volume" | array[0].value = "10" | array[0].line = 4;
  */
 
 SETTING *settingsInit();
 
+// Change the parameter with the new value
 int settingsSet(SETTING *settings,char *param,char *value);
 
+// Return the line of a specific parameter or -1 if not found
 int settingsGetParamLine(SETTING *settings,char *param);

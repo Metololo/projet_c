@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "E:/projets git/projet_c/audio_func.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/audio_func.c.obj"
   "E:/projets git/projet_c/db_func.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/db_func.c.obj"
   "E:/projets git/projet_c/main.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/main.c.obj"
+  "E:/projets git/projet_c/radiofunc.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/radiofunc.c.obj"
   "E:/projets git/projet_c/settings_func.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/settings_func.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

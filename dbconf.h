@@ -11,4 +11,4 @@
 #define DB_HOST "localhost"
 #define DB_PASSWORD ""
 #define DB_PORT 3307 // 3307 -> mariadb   3306 -> mysql
-#define DB_NAME "projet_c"
+#define DB_NAME "radioc"

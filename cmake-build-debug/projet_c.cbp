@@ -94,6 +94,9 @@
 		<Unit filename="E:/projets git/projet_c/main.c">
 			<Option target="projet_c"/>
 		</Unit>
+		<Unit filename="E:/projets git/projet_c/radiofunc.c">
+			<Option target="projet_c"/>
+		</Unit>
 		<Unit filename="E:/projets git/projet_c/settings_func.c">
 			<Option target="projet_c"/>
 		</Unit>

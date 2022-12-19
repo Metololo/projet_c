@@ -7,7 +7,9 @@ CMakeFiles/projet_c.dir/audio_func.c.obj: \
  ../miniaudio.h
 CMakeFiles/projet_c.dir/db_func.c.obj: \
  ../db_func.c \
+ ../db_func.h \
  ../dbconf.h \
+ ../miniaudio.h \
  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/ma_list.h \
  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_com.h \
  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h \
@@ -28,6 +30,8 @@ CMakeFiles/projet_c.dir/main.c.obj: \
  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h \
  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_version.h \
  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mysql.h
+CMakeFiles/projet_c.dir/radiofunc.c.obj: \
+ ../radiofunc.c
 CMakeFiles/projet_c.dir/settings_func.c.obj: \
  ../settings_func.c \
  ../settings_func.h \

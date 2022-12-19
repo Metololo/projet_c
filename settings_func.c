@@ -24,7 +24,7 @@ int settingsGetNumber(){
     while(!feof(conf)){
         fgets(buffer,LINE_MAX_LENGTH,conf);
         if (buffer[0] != '#' && buffer[0] != '\n') {
-            if(strchr(buffer,':') != NULL)
+            if(strchr(buffer,':') != NULL && strlen(buffer) > 3)
                 ++counter;
             }
         }

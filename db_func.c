@@ -12,8 +12,9 @@
 #include <time.h>
 #include <string.h>
 #include <mysql/mysql.h>
-#include <winsock.h>
 #include "dbconf.h"
+#include "db_func.h"
+#include "miniaudio.h"
 
 void dbAddError(MYSQL *mysql){
 
@@ -44,14 +45,7 @@ void dbAddError(MYSQL *mysql){
 
 void dbCreate(MYSQL *mysql){
 
-    mysql = mysql_init(NULL);
-    mysql_options(mysql, MYSQL_READ_DEFAULT_GROUP, "option");
-
-    if (mysql_real_connect(mysql, DB_HOST, DB_USER, DB_PASSWORD, NULL, DB_PORT, NULL, 0) == NULL){
-        dbAddError(mysql);
-        return;
-    }
-    printf("Cr\202ation de la BDD %s...",DB_NAME);
+    printf("Cr\202ation de la BDD %s...\n",DB_NAME);
 
     // WE CREATE THE DATABASE / DELETE IT AND RECREATE IT IF EXISTS
 
@@ -63,7 +57,7 @@ void dbCreate(MYSQL *mysql){
         dbAddError(mysql);
     if(mysql_query(mysql,"CREATE TABLE radio"
                          "("
-                         "    id int AUTO_INCREMENT PRIMARY KEY,"
+                         "    id INTEGER AUTO_INCREMENT PRIMARY KEY,"
                          "    name varchar(50),"
                          "    genre varchar(30)"
                          ")"))
@@ -72,21 +66,94 @@ void dbCreate(MYSQL *mysql){
         dbAddError(mysql);
     if(mysql_query(mysql,"CREATE TABLE music"
                          "("
-                         "    id int AUTO_INCREMENT PRIMARY KEY,"
+                         "    id INTEGER AUTO_INCREMENT PRIMARY KEY,"
                          "    name varchar(100),"
                          "    genre varchar(30),"
-                         "    radio int REFERENCES radio(id)"
+                         "    duration INTEGER,"
+                         "    radio INTEGER REFERENCES radio(id)"
                          ")"))
         dbAddError(mysql);
-
-
-
-    mysql_close(mysql);
-
+    printf("Base de donnee cree avec succes \n");
 }
 
+int dbNewRadio(MYSQL *mysql,char *name,char *genre){
 
+    if(strlen(name) > 50 || strlen(name) < 3){
+        printf("Le nom de la radio doit faire entre 3 et 50 caracteres !\n");
+        return 0;
+    }
+    if(strlen(genre) > 30 || strlen(genre) < 3){
+        printf("Le genre de la radio doit faire entre 3 et 30 caracteres !\n");
+        return 0;
+    }
 
+    char buffer[150];
 
+    snprintf(buffer,128,"INSERT INTO radio(name,genre) VALUES('%s','%s')",name,genre);
+    if(mysql_query(mysql,buffer)){
+        dbAddError(mysql);
+        return 0;
+    }
+    return 1;
+}
+
+int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *name, char *genre,char *radio){
+
+    char buffer[255];
+    int radioID = 0;
+
+    // Verify that the length of value match database limits
+    if(strlen(name) > 100 || strlen(name) < 3){
+        printf("Le nom de la musique doit faire entre 3 et 100 caracteres !\n");
+        return 0;
+    }
+    if(strlen(genre) > 30 || strlen(genre) < 3){
+        printf("Le genre de la musique doit faire entre 3 et 30 caracteres !\n");
+        return 0;
+    }
+    float soundDuration;
+    ma_sound sound;
+    ma_result soundResult;
+    soundResult = ma_sound_init_from_file(engine,name, 0, NULL, NULL, &sound);
+    if (soundResult != MA_SUCCESS) {
+        return 0;
+    }
+
+    ma_sound_get_length_in_seconds(&sound,&soundDuration);
+    int soundDudu = (int) soundDuration;
+    ma_sound_uninit(&sound);
+
+   if(radio == NULL){
+        snprintf(buffer,255,"INSERT INTO music(name,genre,duration) VALUES('%s','%s','%d')",name,genre,soundDudu);
+    }else{
+       char temp[150];
+
+       //GET RADIO ID
+       snprintf(temp,150,"SELECT id FROM radio WHERE name = '%s'",radio);
+       mysql_query(mysql,temp);
+       MYSQL_RES *res = mysql_store_result(mysql);
+       if(res == NULL){
+           dbAddError(mysql);
+           return 0;
+       }
+       MYSQL_ROW row;
+       row = mysql_fetch_row(res);
+       if(row){
+           radioID = atoi(row[0]);
+       }else{
+           printf("NO RADIO FOUND !");
+           return 0;
+       }
+
+       snprintf(buffer,255,"INSERT INTO music(name,genre,duration,radio) VALUES('%s','%s',%d,%d)",name,genre,soundDudu,radioID);
+   }
+
+    if(mysql_query(mysql,buffer)){
+        dbAddError(mysql);
+        return 0;
+    }
+
+    return 1;
+}
 
 

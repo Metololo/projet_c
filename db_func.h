@@ -2,6 +2,7 @@
 // Created by Samy on 07/12/2022.
 //
 
+#include "miniaudio.h"
 #ifndef PROJET_C_DB_FUNC_H
 #define PROJET_C_DB_FUNC_H
 
@@ -14,9 +15,7 @@ void dbAddError(MYSQL *mysql);
 // You can find the SQL scripts for the entire database in /SQL/script.txt
 void dbCreate(MYSQL *mysql);
 
-// To get a setting from /settings/config.txt
-// Return the value for the setting as a String or a NULL pointer if the function doesn't find the
-//setting
-// Use "//" to comment a line
-char *getSetting(char *buffer, char *setting);
-
+// create new radio, return 1 if sucess or 0 if fail.
+int dbNewRadio(MYSQL *mysql,char *name,char *genre);
+// Add music to database, 1 if sucess or 0 if fail.
+int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *name, char *genre,char *radio);

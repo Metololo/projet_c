@@ -22,7 +22,7 @@ void soundStart(ma_sound *sound, time_t *startTime);
 void soundPause(ma_sound *sound, time_t *pause);
 
 // -- soundStart --
-// Pause a sound, and actualize the pause Time.
+// play a sound, and actualize the pause Time.
 void soundPlay(ma_sound *sound,time_t *pauseTime,time_t *totalPause);
 
 // -- soundSetVolume --

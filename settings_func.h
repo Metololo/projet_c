@@ -7,6 +7,7 @@
 
 #endif //PROJET_C_SETTINGS_FUNC_H
 #define LINE_MAX_LENGTH 128
+
 typedef struct SETTING{
     char param[30];
     char value[30];
@@ -24,7 +25,7 @@ int settingsGetNumber();
  *
  * array[0].param = "volume" | array[0].value = "10" | array[0].line = 4;
  */
-
+// DONT FORGET TO free(settings) when finish !
 SETTING *settingsInit();
 
 // Change the parameter with the new value

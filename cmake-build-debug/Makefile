@@ -200,6 +200,30 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/main.c.s
 .PHONY : main.c.s
 
+radiofunc.obj: radiofunc.c.obj
+.PHONY : radiofunc.obj
+
+# target to build an object file
+radiofunc.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/radiofunc.c.obj
+.PHONY : radiofunc.c.obj
+
+radiofunc.i: radiofunc.c.i
+.PHONY : radiofunc.i
+
+# target to preprocess a source file
+radiofunc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/radiofunc.c.i
+.PHONY : radiofunc.c.i
+
+radiofunc.s: radiofunc.c.s
+.PHONY : radiofunc.s
+
+# target to generate assembly for a file
+radiofunc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projet_c.dir\build.make CMakeFiles/projet_c.dir/radiofunc.c.s
+.PHONY : radiofunc.c.s
+
 settings_func.obj: settings_func.c.obj
 .PHONY : settings_func.obj
 
@@ -242,6 +266,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... radiofunc.obj
+	@echo ... radiofunc.i
+	@echo ... radiofunc.s
 	@echo ... settings_func.obj
 	@echo ... settings_func.i
 	@echo ... settings_func.s

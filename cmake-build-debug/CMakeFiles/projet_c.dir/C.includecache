@@ -9,6 +9,8 @@
 E:/projets git/projet_c/audio_func.h
 
 E:/projets git/projet_c/db_func.h
+miniaudio.h
+E:/projets git/projet_c/miniaudio.h
 
 E:/projets git/projet_c/dbconf.h
 
@@ -29,6 +31,10 @@ structures.h
 E:/projets git/projet_c/structures.h
 settings_func.h
 E:/projets git/projet_c/settings_func.h
+unistd.h
+-
+stdbool.h
+-
 
 E:/projets git/projet_c/miniaudio.h
 miniaudio.h

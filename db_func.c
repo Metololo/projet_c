@@ -70,6 +70,7 @@ void dbCreate(MYSQL *mysql){
                          "    name varchar(100),"
                          "    genre varchar(30),"
                          "    duration INTEGER,"
+                         "    path VARCHAR(500)"
                          "    radio INTEGER REFERENCES radio(id)"
                          ")"))
         dbAddError(mysql);
@@ -97,9 +98,9 @@ int dbNewRadio(MYSQL *mysql,char *name,char *genre){
     return 1;
 }
 
-int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *name, char *genre,char *radio){
+int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *path,char *name, char *genre,char *radio){
 
-    char buffer[255];
+    char buffer[800];
     int radioID = 0;
 
     // Verify that the length of value match database limits
@@ -111,10 +112,11 @@ int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *name, char *genre,char *radi
         printf("Le genre de la musique doit faire entre 3 et 30 caracteres !\n");
         return 0;
     }
+
     float soundDuration;
     ma_sound sound;
     ma_result soundResult;
-    soundResult = ma_sound_init_from_file(engine,name, 0, NULL, NULL, &sound);
+    soundResult = ma_sound_init_from_file(engine,path, 0, NULL, NULL, &sound);
     if (soundResult != MA_SUCCESS) {
         return 0;
     }
@@ -124,7 +126,7 @@ int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *name, char *genre,char *radi
     ma_sound_uninit(&sound);
 
    if(radio == NULL){
-        snprintf(buffer,255,"INSERT INTO music(name,genre,duration) VALUES('%s','%s','%d')",name,genre,soundDudu);
+        snprintf(buffer,255,"INSERT INTO music(name,genre,duration,path) VALUES('%s','%s','%d','%s')",name,genre,soundDudu,path);
     }else{
        char temp[150];
 
@@ -145,7 +147,7 @@ int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *name, char *genre,char *radi
            return 0;
        }
 
-       snprintf(buffer,255,"INSERT INTO music(name,genre,duration,radio) VALUES('%s','%s',%d,%d)",name,genre,soundDudu,radioID);
+       snprintf(buffer,255,"INSERT INTO music(name,genre,duration,radio,path) VALUES('%s','%s',%d,%d,'%s')",name,genre,soundDudu,radioID,path);
    }
 
     if(mysql_query(mysql,buffer)){

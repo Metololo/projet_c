@@ -4,28 +4,32 @@
 
 #ifndef PROJET_C_STRUCTURES_H
 #define PROJET_C_STRUCTURES_H
+#define MUSIC_NAME_SIZE 101
+#define MUSIC_GENRE_SIZE 31
+#define PATH_SIZE 501
 
-#endif //PROJET_C_STRUCTURES_H
+typedef struct Music Music;
+
+struct Music{
+    int id;
+    char name[MUSIC_NAME_SIZE];
+    char genre[MUSIC_GENRE_SIZE];
+    char path[PATH_SIZE];
+    int duration;
+    Music *next;
+};
 
 typedef struct Radio{
     unsigned int id;
     char name[51];
     char genre[31];
-    int currentSong;
     int pause;
+    Music *head;
 }Radio;
 
-typedef struct Music{
-    unsigned int id;
-    char name[100];
-    char genre[30];
-    unsigned int duration;
-    unsigned int radio;
-}Music;
+#endif //PROJET_C_STRUCTURES_H
 
-typedef struct MusicNode MusicNode;
 
-struct MusicNode{
-    Music *radio;
-    MusicNode *next;
-};
+
+
+

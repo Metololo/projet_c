@@ -7,6 +7,7 @@
 #include "db_func.h"
 #include "structures.h"
 #include "settings_func.h"
+#include "radiofunc.h"
 #include <unistd.h>
 #include <stdbool.h>
 
@@ -39,12 +40,14 @@ int main() {
     int fields = (int) mysql_num_fields(res);
 
 
-    while((row = mysql_fetch_row(res))){
+
+
+    /*while((row = mysql_fetch_row(res))){
        for(int i= 0;i<fields;++i){
            printf("%s ",row[i] ? row[i] : "NULL");
        }
         printf("\n");
-    }
+    }*/
 
     ma_result result;
     ma_engine engine; // Declare the engine used to play sound
@@ -71,37 +74,28 @@ int main() {
 
     //This function init a sound from pathfile ( doesn't play it ).
 
-    soundResult = ma_sound_init_from_file(&engine, "music.mp3", 0, NULL, NULL, &sound);
-    if (soundResult != MA_SUCCESS) {
-        return soundResult;
+
+    Music *radioFront = NULL; // avant de la queue
+    Music *radioRear = NULL; // arrière de la queue
+
+    radioInit(mysql,"coolRap",&radioFront,&radioRear);
+
+    Music *temp = radioFront;
+   while(temp != NULL){
+
+        printf("%d %s %s %d %s\n",temp->id,temp->name,temp->genre,temp->duration,temp->path);
+        temp = temp->next;
     }
 
-    soundStart(&sound,&startTime);
-    ma_sound_set_looping(&sound,TRUE);
+    radioPlay(&radioFront,&radioRear,&engine,&sound);
 
-    while(!ma_sound_at_end(&sound)){
-        printf("%d\n", ma_sound_is_looping(&sound));
-        timer = soundGetTimer(startTime,totalPauseTime);
-        soundFormatTime(timeNow,50,timer);
-        printf("Temp : %s \n", timeNow);
-        sleep(1);
+    radioFree(&radioFront,&radioRear);
 
-    }
-    printf("\n");
-    printf("SON FINIS");
-
-
-
-
-
-
-
-
-    //dbNewRadio(mysql,"coolRap","hip hop");
 
 
     mysql_close(mysql);
     //free(settings);
+
 
   /* ma_result result;
     ma_engine engine; // Declare the engine used to play sound

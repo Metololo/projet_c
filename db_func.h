@@ -18,4 +18,4 @@ void dbCreate(MYSQL *mysql);
 // create new radio, return 1 if sucess or 0 if fail.
 int dbNewRadio(MYSQL *mysql,char *name,char *genre);
 // Add music to database, 1 if sucess or 0 if fail.
-int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *name, char *genre,char *radio);
+int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *path,char *name, char *genre,char *radio);

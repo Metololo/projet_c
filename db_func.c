@@ -15,6 +15,7 @@
 #include "dbconf.h"
 #include "db_func.h"
 #include "miniaudio.h"
+#include "radiofunc.h"
 
 void dbAddError(MYSQL *mysql){
 
@@ -71,7 +72,15 @@ void dbCreate(MYSQL *mysql){
                          "    genre varchar(30),"
                          "    duration INTEGER,"
                          "    path VARCHAR(500)"
-                         "    radio INTEGER REFERENCES radio(id)"
+                         ")"))
+        dbAddError(mysql);
+    if(mysql_query(mysql,"DROP TABLE IF EXISTS radio_music"))
+        dbAddError(mysql);
+    if(mysql_query(mysql,"CREATE TABLE radio_music"
+                         "("
+                         "    music INTEGER REFERENCES music(id),"
+                         "    radio INTEGER REFERENCES radio(id),"
+                         "    PRIMARY KEY(music,radio)"
                          ")"))
         dbAddError(mysql);
     printf("Base de donnee cree avec succes \n");
@@ -98,18 +107,44 @@ int dbNewRadio(MYSQL *mysql,char *name,char *genre){
     return 1;
 }
 
-int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *path,char *name, char *genre,char *radio){
+int getMusicId(MYSQL *mysql,char *music){
+    int musicID;
+    char buffer[150];
 
+    snprintf(buffer,150,"SELECT id FROM music WHERE name = '%s'",music);
+    if(mysql_query(mysql,buffer)){
+        dbAddError(mysql);
+        return 0;
+    }
+    MYSQL_RES *res = mysql_store_result(mysql);
+
+    if(res == NULL){
+        dbAddError(mysql);
+        return 0;
+    }
+    MYSQL_ROW row;
+    row = mysql_fetch_row(res);
+    if(row){
+        musicID = atoi(row[0]);
+    }else{
+        fprintf(stderr,"NO MUSIC FOUND FOR getRadioID : %s\n",music);
+        return 0;
+    }
+    return musicID;
+}
+
+int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *path,char *name, char *genre,char *radio){
     char buffer[800];
     int radioID = 0;
+    int musicID = 0;
 
     // Verify that the length of value match database limits
     if(strlen(name) > 100 || strlen(name) < 3){
-        printf("Le nom de la musique doit faire entre 3 et 100 caracteres !\n");
+        fprintf(stderr,"Le nom de la musique doit faire entre 3 et 100 caracteres !\n");
         return 0;
     }
     if(strlen(genre) > 30 || strlen(genre) < 3){
-        printf("Le genre de la musique doit faire entre 3 et 30 caracteres !\n");
+        fprintf(stderr,"Le genre de la musique doit faire entre 3 et 30 caracteres !\n");
         return 0;
     }
 
@@ -126,36 +161,62 @@ int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *path,char *name, char *genre
     ma_sound_uninit(&sound);
 
    if(radio == NULL){
-        snprintf(buffer,255,"INSERT INTO music(name,genre,duration,path) VALUES('%s','%s','%d','%s')",name,genre,soundDudu,path);
-    }else{
-       char temp[150];
-
-       //GET RADIO ID
-       snprintf(temp,150,"SELECT id FROM radio WHERE name = '%s'",radio);
-       mysql_query(mysql,temp);
-       MYSQL_RES *res = mysql_store_result(mysql);
-       if(res == NULL){
+       snprintf(buffer,255,"INSERT INTO music(name,genre,duration,path) VALUES('%s','%s','%d','%s')",name,genre,soundDudu,path);
+       if(mysql_query(mysql,buffer)){
            dbAddError(mysql);
            return 0;
        }
-       MYSQL_ROW row;
-       row = mysql_fetch_row(res);
-       if(row){
-           radioID = atoi(row[0]);
-       }else{
-           printf("NO RADIO FOUND !");
-           return 0;
-       }
-
-       snprintf(buffer,255,"INSERT INTO music(name,genre,duration,radio,path) VALUES('%s','%s',%d,%d,'%s')",name,genre,soundDudu,radioID,path);
+       return 1;
    }
 
+   char temp[150];
+
+   radioID = getRadioID(mysql,radio);
+   if(radioID == 0) return 0;
+
+   snprintf(buffer,255,"INSERT INTO music(name,genre,duration,path) VALUES('%s','%s',%d,'%s')",name,genre,soundDudu,path);
+
+    if(mysql_query(mysql,buffer)){
+        dbAddError(mysql);
+        return 0;
+    }
+    musicID = getMusicId(mysql,name);
+    if(musicID == 0) return 0;
+
+    snprintf(buffer,255,"INSERT INTO radio_music(music,radio) VALUES(%d,%d)",musicID,radioID);
     if(mysql_query(mysql,buffer)){
         dbAddError(mysql);
         return 0;
     }
 
     return 1;
+}
+
+int getRadioID(MYSQL *mysql,char *radio){
+    int radioID;
+    char buffer[150];
+
+    snprintf(buffer,150,"SELECT id FROM radio WHERE name = '%s'",radio);
+    if(mysql_query(mysql,buffer)){
+        dbAddError(mysql);
+        return 0;
+    }
+    MYSQL_RES *res = mysql_store_result(mysql);
+
+    if(res == NULL){
+        dbAddError(mysql);
+        return 0;
+    }
+    MYSQL_ROW row;
+    row = mysql_fetch_row(res);
+    if(row){
+        radioID = atoi(row[0]);
+    }else{
+        fprintf(stderr,"NO RADIO FOUND FOR getRadioID : %s\n",radio);
+        return 0;
+    }
+    return radioID;
+
 }
 
 

@@ -14,9 +14,8 @@
 int main() {
 
    /* SETTING *settings;
-    settings = settingsInit();
+    settings = settingsInit(); // DONT FORGET TO freeSettings(settings) at the end
     settingsSet(settings,"blabla","bonjourbonuour");*/
-
 
 
     MYSQL *mysql;
@@ -31,23 +30,6 @@ int main() {
     if(mysql_query(mysql,"USE radioC")){
         dbCreate(mysql);
     }
-
-    if(mysql_query(mysql,"SELECT id,name,genre FROM radio")){
-        fprintf(stderr, mysql_error(mysql));
-    }
-    MYSQL_RES *res = mysql_store_result(mysql);
-    MYSQL_ROW row;
-    int fields = (int) mysql_num_fields(res);
-
-
-
-
-    /*while((row = mysql_fetch_row(res))){
-       for(int i= 0;i<fields;++i){
-           printf("%s ",row[i] ? row[i] : "NULL");
-       }
-        printf("\n");
-    }*/
 
     ma_result result;
     ma_engine engine; // Declare the engine used to play sound
@@ -72,13 +54,14 @@ int main() {
         return result;
     }
 
+
     //This function init a sound from pathfile ( doesn't play it ).
 
 
     Music *radioFront = NULL; // avant de la queue
     Music *radioRear = NULL; // arrière de la queue
 
-    radioInit(mysql,"coolRap",&radioFront,&radioRear);
+    radioInit(mysql,"pop&rock",&radioFront,&radioRear);
 
     Music *temp = radioFront;
    while(temp != NULL){
@@ -90,7 +73,6 @@ int main() {
     radioPlay(&radioFront,&radioRear,&engine,&sound);
 
     radioFree(&radioFront,&radioRear);
-
 
 
     mysql_close(mysql);

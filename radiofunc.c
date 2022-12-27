@@ -14,39 +14,13 @@
 #include "audio_func.h"
 #include <unistd.h>
 
-int getRadioID(MYSQL *mysql,char *radio){
-    int radioID;
-    char buffer[150];
-
-    snprintf(buffer,150,"SELECT id FROM radio WHERE name = '%s'",radio);
-    if(mysql_query(mysql,buffer)){
-        dbAddError(mysql);
-        return 0;
-    }
-    MYSQL_RES *res = mysql_store_result(mysql);
-
-    if(res == NULL){
-        dbAddError(mysql);
-        return 0;
-    }
-    MYSQL_ROW row;
-    row = mysql_fetch_row(res);
-    if(row){
-        radioID = atoi(row[0]);
-    }else{
-        printf("NO RADIO FOUND !");
-        return 0;
-    }
-    return radioID;
-
-}
 
 void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
     char buffer[150];
     MYSQL_ROW row;
     int radioID = getRadioID(mysql,radio);
 
-    snprintf(buffer,150,"SELECT id,name,genre,duration,path FROM music WHERE radio = %d ORDER BY RAND()",radioID);
+    snprintf(buffer,150,"SELECT id,name,genre,duration,path FROM music WHERE id IN (SELECT music FROM radio_music WHERE radio = %d) ORDER BY RAND();",radioID);
 
     if(mysql_query(mysql,buffer)){
         dbAddError(mysql);
@@ -55,7 +29,7 @@ void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
 
     MYSQL_RES *res = mysql_store_result(mysql);
     if(!res){
-        fprintf(stderr,"AUCUNNN SONNN trouve !!!");
+        fprintf(stderr,"AUCUNNN SONNN trouve !!!\n");
         return;
     }
     unsigned int field = mysql_num_fields(res);
@@ -82,7 +56,7 @@ void radioNext(Music **front,Music **rear,ma_sound *sound){
 
 void radioPlay(Music **front,Music **rear,ma_engine *engine,ma_sound *sound){
     if(isEmpty(*front)){
-        fprintf(stderr,"Aucun son dans la radio");
+        fprintf(stderr,"Aucun son dans la radio\n");
         return;
     }
     float timer;

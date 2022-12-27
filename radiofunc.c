@@ -65,22 +65,30 @@ void radioPlay(Music **front,Music **rear,ma_engine *engine,ma_sound *sound){
     Music *currentSong = getFront(front);
     ma_result result;
     char duration[50];
+    char timeNow[50];
 
    while(*front != NULL){
         result = ma_sound_init_from_file(engine,currentSong->path, 0, NULL, NULL, sound);
         if (result != MA_SUCCESS) {
             return;
         }
-        ma_sound_start(sound);
+       soundStart(sound,&startTime);
 
-        printf("----PLAYING----\n");
-        printf("--NAME : %s --\n",currentSong->name);
-        printf("-- GENRE : %s --\n",currentSong->genre);
-        soundFormatTime(duration,50,(float) currentSong->duration);
-        printf("-- Total duration : %s --\n", duration);
+
 
         while(!ma_sound_at_end(sound)){
+            system("cls");
+            printf("----PLAYING----\n");
+            printf("--NAME : %s --\n",currentSong->name);
+            printf("-- GENRE : %s --\n",currentSong->genre);
+            soundFormatTime(duration,50,(float) currentSong->duration);
+
+            timer = soundGetTimer(startTime,totalPauseTime);
+            soundFormatTime(timeNow,50,timer);
+
+            printf("-- %s : %s --\n",timeNow,duration);
             sleep(1);
+            
         }
 
         radioNext(front,rear,sound);

@@ -61,7 +61,7 @@ int main() {
     Music *radioFront = NULL; // avant de la queue
     Music *radioRear = NULL; // arrière de la queue
 
-    radioInit(mysql,"pop&rock",&radioFront,&radioRear);
+    radioInit(mysql,"rap1",&radioFront,&radioRear);
 
     Music *temp = radioFront;
    while(temp != NULL){

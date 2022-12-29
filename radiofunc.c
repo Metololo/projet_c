@@ -64,6 +64,7 @@ void radioPlay(Music **front,Music **rear,ma_engine *engine,ma_sound *sound){
     time_t totalPauseTime = 0; // total pause time
     Music *currentSong = getFront(front);
     ma_result result;
+    time_t pauseTime = 0;
     char duration[50];
     char timeNow[50];
 
@@ -74,21 +75,17 @@ void radioPlay(Music **front,Music **rear,ma_engine *engine,ma_sound *sound){
         }
        soundStart(sound,&startTime);
 
+       printf("----PLAYING----\n");
+       printf("--NAME : %s --\n",currentSong->name);
+       printf("-- GENRE : %s --\n",currentSong->genre);
+       soundFormatTime(duration,50,(float) currentSong->duration);
+
+       printf("-- %s : %s --\n",timeNow,duration);
+       int choice;
 
 
         while(!ma_sound_at_end(sound)){
-            system("cls");
-            printf("----PLAYING----\n");
-            printf("--NAME : %s --\n",currentSong->name);
-            printf("-- GENRE : %s --\n",currentSong->genre);
-            soundFormatTime(duration,50,(float) currentSong->duration);
-
-            timer = soundGetTimer(startTime,totalPauseTime);
-            soundFormatTime(timeNow,50,timer);
-
-            printf("-- %s : %s --\n",timeNow,duration);
             sleep(1);
-            
         }
 
         radioNext(front,rear,sound);
@@ -99,14 +96,47 @@ void radioPlay(Music **front,Music **rear,ma_engine *engine,ma_sound *sound){
 
 }
 
-
-
-void radioStop(){
-
-}
-
-void radioFree(Music **front,Music **rear){
+void radioStop(Music **front,Music **rear){
     while(!isEmpty(*front)){
         Dequeue(front,rear);
+    }
+}
+
+Radio *addRadio(int id,char *name,char *genre){
+    Radio *new = malloc(sizeof(Radio));
+    snprintf(new->name,51,"%s",name);
+    snprintf(new->genre,31,"%s",genre);
+    new->id = id;
+    new->prev = NULL;
+    new->next = NULL;
+    return new;
+}
+
+
+void radioListInit(MYSQL *mysql,Radio **head,Radio **tail){
+    MYSQL_RES *res;
+    MYSQL_ROW row;
+
+    if(mysql_query(mysql,"SELECT * FROM radio")){
+        dbAddError(mysql);
+        return;
+    }
+
+    *tail = NULL;
+    *head = NULL;
+
+    res = mysql_store_result(mysql);
+    while((row = mysql_fetch_row(res))){
+        int id = atoi(row[0]);
+        Radio *newRadio = addRadio(id,row[1],row[2]);
+        if((*head) == NULL){
+           (*head) = newRadio;
+            (*tail) = newRadio;
+        }else{
+            (*head)->prev = newRadio;
+            newRadio->next = (*head);
+            (*head) = newRadio;
+        }
+
     }
 }

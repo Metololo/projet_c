@@ -12,7 +12,7 @@
 void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear);
 
 // Free all nodes from the radio Queue..
-void radioFree(Music **front,Music **rear);
+void radioStop(Music **front,Music **rear);
 
 // Play the first song in the QUEUE
 void radioPlay(Music **front,Music **rear,ma_engine *engine,ma_sound *sound);
@@ -20,5 +20,10 @@ void radioPlay(Music **front,Music **rear,ma_engine *engine,ma_sound *sound);
 // free the Node of the finished song..
 void radioNext(Music **front,Music **rear,ma_sound *sound);
 
+// Create a new radio Node and initialize it
+Radio *addRadio(int id,char *name,char *genre);
+
+// Take all radios from database and create a doubly linked list
+void radioListInit(MYSQL *mysql,Radio **head,Radio **tail);
 
 #endif //PROJET_C_RADIOFUNC_H

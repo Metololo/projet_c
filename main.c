@@ -61,7 +61,7 @@ int main() {
     Music *radioFront = NULL; // avant de la queue
     Music *radioRear = NULL; // arrière de la queue
 
-    radioInit(mysql,"rap1",&radioFront,&radioRear);
+    /*radioInit(mysql,"rap1",&radioFront,&radioRear);
 
     Music *temp = radioFront;
    while(temp != NULL){
@@ -72,12 +72,29 @@ int main() {
 
     radioPlay(&radioFront,&radioRear,&engine,&sound);
 
-    radioFree(&radioFront,&radioRear);
+    radioStop(&radioFront,&radioRear);*/
+
+    Radio *radioListHead;
+    Radio *radioListTail;
+    radioListInit(mysql,&radioListHead,&radioListTail);
+
+    Radio *temp = radioListHead;
+    printf("SENS -->\n");
+    while(temp != NULL){
+        printf("%s ",temp->name);
+        temp = temp->next;
+    }
+    printf("\nSENS <--\n");
+    temp = radioListTail;
+    while(temp != NULL){
+        printf("%s ",temp->name);
+        temp = temp->prev;
+    }
+
 
 
     mysql_close(mysql);
     //free(settings);
-
 
   /* ma_result result;
     ma_engine engine; // Declare the engine used to play sound

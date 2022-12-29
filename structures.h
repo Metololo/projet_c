@@ -19,13 +19,15 @@ struct Music{
     Music *next;
 };
 
-typedef struct Radio{
-    unsigned int id;
+typedef struct Radio Radio;
+
+struct Radio{
+     unsigned int id;
     char name[51];
     char genre[31];
-    int pause;
-    Music *head;
-}Radio;
+    Radio *next;
+    Radio *prev;
+};
 
 #endif //PROJET_C_STRUCTURES_H
 

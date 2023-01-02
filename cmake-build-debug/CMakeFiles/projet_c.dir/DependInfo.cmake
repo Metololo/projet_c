@@ -4,25 +4,17 @@ set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
 
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "C"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_C
-  "E:/projets git/projet_c/audio_func.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/audio_func.c.obj"
-  "E:/projets git/projet_c/db_func.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/db_func.c.obj"
-  "E:/projets git/projet_c/main.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/main.c.obj"
-  "E:/projets git/projet_c/radiofunc.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/radiofunc.c.obj"
-  "E:/projets git/projet_c/settings_func.c" "E:/projets git/projet_c/cmake-build-debug/CMakeFiles/projet_c.dir/settings_func.c.obj"
-  )
-set(CMAKE_C_COMPILER_ID "GNU")
-
-# The include file search paths:
-set(CMAKE_C_TARGET_INCLUDE_PATH
-  "E:/wamp64/bin/mariadb/mariadb10.6.5/include"
   )
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "E:/projets git/projetC/projetC/audio_func.c" "CMakeFiles/projet_c.dir/audio_func.c.obj" "gcc" "CMakeFiles/projet_c.dir/audio_func.c.obj.d"
+  "E:/projets git/projetC/projetC/db_func.c" "CMakeFiles/projet_c.dir/db_func.c.obj" "gcc" "CMakeFiles/projet_c.dir/db_func.c.obj.d"
+  "E:/projets git/projetC/projetC/gtk_functions.c" "CMakeFiles/projet_c.dir/gtk_functions.c.obj" "gcc" "CMakeFiles/projet_c.dir/gtk_functions.c.obj.d"
+  "E:/projets git/projetC/projetC/main.c" "CMakeFiles/projet_c.dir/main.c.obj" "gcc" "CMakeFiles/projet_c.dir/main.c.obj.d"
+  "E:/projets git/projetC/projetC/radiofunc.c" "CMakeFiles/projet_c.dir/radiofunc.c.obj" "gcc" "CMakeFiles/projet_c.dir/radiofunc.c.obj.d"
+  "E:/projets git/projetC/projetC/settings_func.c" "CMakeFiles/projet_c.dir/settings_func.c.obj" "gcc" "CMakeFiles/projet_c.dir/settings_func.c.obj.d"
+  "E:/projets git/projetC/projetC/struct_func.c" "CMakeFiles/projet_c.dir/struct_func.c.obj" "gcc" "CMakeFiles/projet_c.dir/struct_func.c.obj.d"
   )
 
 # Targets to which this target links.

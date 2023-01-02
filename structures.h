@@ -8,6 +8,8 @@
 #define MUSIC_GENRE_SIZE 31
 #define PATH_SIZE 501
 
+
+
 typedef struct Music Music;
 
 struct Music{
@@ -22,11 +24,19 @@ struct Music{
 typedef struct Radio Radio;
 
 struct Radio{
-     unsigned int id;
+    unsigned int id;
     char name[51];
     char genre[31];
     Radio *next;
     Radio *prev;
+};
+
+typedef struct RadioListInfo RadioListInfo;
+
+struct RadioListInfo{
+    int pos;
+    Radio *radioListHead;
+    Radio *radioListTail;
 };
 
 #endif //PROJET_C_STRUCTURES_H

@@ -28,11 +28,13 @@ void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
     }
 
     MYSQL_RES *res = mysql_store_result(mysql);
-    if(!res){
-        fprintf(stderr,"AUCUNNN SONNN trouve !!!\n");
+
+    unsigned int field = mysql_num_fields(res);
+
+    if(mysql_num_rows(res) == 0){
+        printf("NO SOUND");
         return;
     }
-    unsigned int field = mysql_num_fields(res);
 
     while((row = mysql_fetch_row(res))){
         int id = atoi(row[0]);
@@ -139,4 +141,25 @@ void radioListInit(MYSQL *mysql,Radio **head,Radio **tail){
         }
 
     }
+}
+
+int radioIsEmpty(Radio *head){
+    return head == NULL ? 1 : 0;
+}
+
+int radioListGetSize(Radio *head){
+    int counter = 0;
+    while(head != NULL){
+        head = head->next;
+        ++counter;
+    }
+    return counter;
+}
+
+
+Radio *radioGetCurrent(RadioListInfo radio){
+    for(int i = radio.pos;i>0;++i){
+        radio.radioListHead = radio.radioListHead->next;
+    }
+    return radio.radioListHead;
 }

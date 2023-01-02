@@ -1,4 +1,5 @@
 #define MINIAUDIO_IMPLEMENTATION
+
 #include <stdio.h>
 #include <mysql/mysql.h>
 #include "miniaudio.h"
@@ -8,28 +9,26 @@
 #include "structures.h"
 #include "settings_func.h"
 #include "radiofunc.h"
+#include <gtk/gtk.h>
+#include <gtk/gtkx.h>
+#include <signal.h>
+#include <sys/types.h>
 #include <unistd.h>
-#include <stdbool.h>
+#include <ctype.h>
 
-int main() {
+GtkWidget *window;
+GtkBuilder *builder;
+GtkWidget *radio_name;
+GtkWidget *next_radio;
+GtkWidget *prev_radio;
 
-   /* SETTING *settings;
-    settings = settingsInit(); // DONT FORGET TO freeSettings(settings) at the end
-    settingsSet(settings,"blabla","bonjourbonuour");*/
+G_MODULE_EXPORT void next_radio_clicked(GtkButton *b, gpointer user_data);
+G_MODULE_EXPORT void prev_radio_clicked(GtkButton *b, gpointer user_data);
+G_MODULE_EXPORT gboolean gboolean test(int (*a)(int));
 
 
-    MYSQL *mysql;
-    mysql = mysql_init(NULL);
-    mysql_options(mysql, MYSQL_READ_DEFAULT_GROUP, "option");
+int main(int argc,char **argv) {
 
-    if (mysql_real_connect(mysql, DB_HOST, DB_USER, DB_PASSWORD, NULL, DB_PORT, NULL, 0) == NULL){
-        dbAddError(mysql);
-        fprintf(stderr, mysql_error(mysql));
-    }
-
-    if(mysql_query(mysql,"USE radioC")){
-        dbCreate(mysql);
-    }
 
     ma_result result;
     ma_engine engine; // Declare the engine used to play sound
@@ -49,17 +48,103 @@ int main() {
 
     float timer;
 
+   /* SETTING *settings;
+    settings = settingsInit(); // DONT FORGET TO freeSettings(settings) at the end
+    settingsSet(settings,"blabla","bonjourbonuour");*/
+
+
+   // -----------------------------
+   // START MYSQL
+    // -----------------------------
+
+    MYSQL *mysql;
+    mysql = mysql_init(NULL);
+    mysql_options(mysql, MYSQL_READ_DEFAULT_GROUP, "option");
+
+    if (mysql_real_connect(mysql, DB_HOST, DB_USER, DB_PASSWORD, NULL, DB_PORT, NULL, 0) == NULL){
+        dbAddError(mysql);
+        fprintf(stderr, mysql_error(mysql));
+    }
+
+    if(mysql_query(mysql,"USE radioC")){
+        dbCreate(mysql);
+    }
+
+    // -----------------------------
+    // START MINIAUDIO
+    // -----------------------------
+
+
     result = ma_engine_init(NULL,&engine); // Start the engine
     if(result != MA_SUCCESS){
         return result;
     }
 
+    // -----------------------------
+    // INIT RADIO LIST ( start at radioListHead ) with name,genre,id.
+    // -----------------------------
 
-    //This function init a sound from pathfile ( doesn't play it ).
+    Radio *radioListHead = NULL;
+    Radio *radioListTail = NULL;
+
+    RadioListInfo radioList;
+    radioList.pos = 0;
+
+    radioListInit(mysql,&radioListHead,&radioListTail);
+
+    // -----------------------------
+    // START GTK
+    // -----------------------------
+
+    gtk_init(&argc, &argv);
+
+    GtkCssProvider *cssProvider = gtk_css_provider_new();
+    gtk_css_provider_load_from_path(cssProvider, "../style/theme.css", NULL);
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+                                              GTK_STYLE_PROVIDER(cssProvider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_USER);
+
+    builder = gtk_builder_new();
+    gtk_builder_add_from_file(builder, "../app.glade", NULL);
+
+    window = GTK_WIDGET(gtk_builder_get_object(builder, "windowApp"));
+    gtk_builder_connect_signals(builder, NULL);
+
+    radio_name = GTK_WIDGET(gtk_builder_get_object(builder,"radio"));
+    next_radio = GTK_WIDGET(gtk_builder_get_object(builder, "next-radio"));
+    prev_radio = GTK_WIDGET(gtk_builder_get_object(builder, "prev-radio"));
+
+    g_signal_connect(next_radio, "clicked", G_CALLBACK(next_radio_clicked), &radioList);
+    g_signal_connect(prev_radio, "clicked", G_CALLBACK(prev_radio_clicked), &radioList);
+
+    g_object_unref(builder);
+
+    if(!radioIsEmpty(radioListHead)){
+        gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) radioListHead->name);
+    }
+
+    radioList.radioListHead = radioListHead;
+    radioList.radioListTail = radioListTail;
+
+    Radio *currentRadio = radioGetCurrent(radioList);
+
+    Music *radioFront = NULL; // AVANT DE LA FILE
+    Music *radioRear = NULL; // ARRIERE DE LA FILE
+
+    radioInit(mysql, currentRadio->name, &radioFront, &radioRear);
+
+    Music *temp = radioFront;
+
+    int i = 0;
+    g_timeout_add(1000, test, &i);
 
 
-    Music *radioFront = NULL; // avant de la queue
-    Music *radioRear = NULL; // arrière de la queue
+    gtk_widget_show(window);
+    gtk_main();
+
+    radioStop(&radioFront, &radioRear);
+
+
 
     /*radioInit(mysql,"rap1",&radioFront,&radioRear);
 
@@ -74,50 +159,15 @@ int main() {
 
     radioStop(&radioFront,&radioRear);*/
 
-    Radio *radioListHead;
-    Radio *radioListTail;
-    radioListInit(mysql,&radioListHead,&radioListTail);
 
-    Radio *temp = radioListHead;
-    printf("SENS -->\n");
-    while(temp != NULL){
-        printf("%s ",temp->name);
-        temp = temp->next;
-    }
-    printf("\nSENS <--\n");
-    temp = radioListTail;
-    while(temp != NULL){
-        printf("%s ",temp->name);
-        temp = temp->prev;
-    }
 
 
 
     mysql_close(mysql);
+    ma_engine_uninit(&engine);
     //free(settings);
 
-  /* ma_result result;
-    ma_engine engine; // Declare the engine used to play sound
-
-    ma_result soundResult;
-    ma_sound sound; // Use to play sounds and manage them.
-
-    time_t startTime = 0; // Store the time when the sound started
-    time_t pauseTime = 0; // time when sound paused
-    time_t totalPauseTime = 0; // total pause time
-
-    float soundDuration = 0;
-
-    int choice;
-    char timeNow[50];
-    char duration[50];
-
-    float timer;
-
-    result = ma_engine_init(NULL,&engine); // Start the engine
-    if(result != MA_SUCCESS){
-        return result;
-    }
+  /*
 
     //This function init a sound from pathfile ( doesn't play it ).
     soundResult = ma_sound_init_from_file(&engine, "music.mp3", 0, NULL, NULL, &sound);
@@ -175,8 +225,61 @@ int main() {
         }
     } while (choice != 0);
 
-    ma_engine_uninit(&engine);*/
+    */
 
     return 0;
 }
+
+
+void next_radio_clicked(GtkButton *b, gpointer user_data){
+    struct RadioListInfo *list = (struct RadioListInfo *) user_data;
+
+    if(list->pos+1 < radioListGetSize(list->radioListHead))  list->pos++;
+    int i = list->pos;
+    Radio *temp = list->radioListHead;
+
+    for(i= list->pos;i>0;--i){
+        if(temp == NULL) return;
+        temp = temp->next;
+    }
+    if(temp == NULL) return;
+
+
+
+    gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) temp->name);
+}
+
+void prev_radio_clicked(GtkButton *b, gpointer user_data){
+    struct RadioListInfo *list = (struct RadioListInfo *) user_data;
+
+    if(list->pos > 0) list->pos--;
+    int i = list->pos;
+    Radio *temp = list->radioListHead;
+
+    for(i=list->pos;i>0;--i){
+        if(temp == NULL) return;
+        temp = temp->next;
+    }
+    if(temp == NULL) return;
+
+
+
+    gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) temp->name);
+}
+
+gboolean test(int (*a)(int)){
+    int *i = (int *) data;
+    if(*i<5) {
+        ++*i;
+        printf("%d ",*i);
+        return TRUE;
+    }
+    else{
+        printf("FINIS");
+        return FALSE;
+    }
+
+}
+
+
 

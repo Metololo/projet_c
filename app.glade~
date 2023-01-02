@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkWindow" id="windowApp">
+    <property name="name">window</property>
+    <property name="width-request">1000</property>
+    <property name="height-request">600</property>
+    <property name="can-focus">False</property>
+    <property name="resizable">False</property>
+    <child>
+      <object class="GtkFixed">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkStack" id="mainStack">
+            <property name="width-request">700</property>
+            <property name="height-request">400</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <child>
+              <object class="GtkFixed">
+                <property name="width-request">1000</property>
+                <property name="height-request">600</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="width-request">150</property>
+                    <property name="height-request">92</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="pixbuf">images\Color.png</property>
+                  </object>
+                  <packing>
+                    <property name="x">391</property>
+                    <property name="y">162</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="tooltip-text" translatable="yes">Next</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixbuf">images\right.png</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="button"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">631</property>
+                    <property name="y">210</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button2">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="tooltip-text" translatable="yes">Previous</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixbuf">images\left.png</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="button"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">330</property>
+                    <property name="y">210</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkProgressBar">
+                    <property name="name">progress-bar</property>
+                    <property name="width-request">475</property>
+                    <property name="height-request">8</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="fraction">0.40</property>
+                  </object>
+                  <packing>
+                    <property name="x">261</property>
+                    <property name="y">528</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="tooltip-text" translatable="yes">Pause</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixbuf">images\pause.png</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="pause_button"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">467</property>
+                    <property name="y">447</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkVolumeButton">
+                    <property name="name">volume</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="focus-on-click">False</property>
+                    <property name="receives-default">True</property>
+                    <property name="relief">none</property>
+                    <property name="orientation">vertical</property>
+                    <property name="icons">audio-volume-muted-symbolic
+audio-volume-high-symbolic
+audio-volume-low-symbolic
+audio-volume-medium-symbolic</property>
+                    <child internal-child="plus_button">
+                      <object class="GtkButton">
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="relief">none</property>
+                      </object>
+                    </child>
+                    <child internal-child="minus_button">
+                      <object class="GtkButton">
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="relief">none</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">750</property>
+                    <property name="y">465</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">1:20</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Inter 10"/>
+                      <attribute name="weight" value="medium"/>
+                    </attributes>
+                    <style>
+                      <class name="timer"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">217</property>
+                    <property name="y">525</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">3:23</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Inter 10"/>
+                      <attribute name="weight" value="medium"/>
+                    </attributes>
+                    <style>
+                      <class name="timer"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">755</property>
+                    <property name="y">525</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label1">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Thriller</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Inter Bold 13"/>
+                    </attributes>
+                    <style>
+                      <class name="song-infos"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">217</property>
+                    <property name="y">469</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="name">song-genre</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">pop</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Inter 10"/>
+                    </attributes>
+                    <style>
+                      <class name="song-infos"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">217</property>
+                    <property name="y">488</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="radio">
+                    <property name="name">radio-title</property>
+                    <property name="width-request">337</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">No radio created</property>
+                    <property name="justify">center</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Rock Salt 14"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">330</property>
+                    <property name="y">307</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">page0</property>
+                <property name="title" translatable="yes">page0</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

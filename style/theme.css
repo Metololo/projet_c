@@ -1,0 +1,65 @@
+#window{
+    background-color: #45414B;
+}
+.coucou{
+    color: white;
+}
+.button{
+    background: none;
+    color: inherit;
+    border: 2px solid transparent;
+    box-shadow: none;
+    border-radius: 100px;
+    padding: 8px;
+    outline: inherit;
+}
+
+.button:hover {
+    border-color: white;
+}
+.pause_button{
+    background: none;
+    color: inherit;
+    border: 2px solid transparent;
+    box-shadow: none;
+    border-radius: 100px;
+    padding: 8px;
+    outline: inherit;
+}
+
+#volume{
+    background-color: #FFACAC;
+    border-radius: 20px;
+}
+
+
+progress,trough{
+    border-radius: 15px;
+}
+trough{
+    min-height: 4px;
+    background: #FFFFFF;
+}
+progress{
+    min-height: 6px;
+    background: #FFACAC;
+    border: none;
+}
+#radio-title{
+    color: white;
+}
+.song-infos{
+    color: white;
+
+}
+
+#song-genre{
+    opacity: 0.8;
+}
+
+.timer{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 9.225px;
+    color: #FFFFFF;
+}

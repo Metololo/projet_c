@@ -26,4 +26,11 @@ Radio *addRadio(int id,char *name,char *genre);
 // Take all radios from database and create a doubly linked list
 void radioListInit(MYSQL *mysql,Radio **head,Radio **tail);
 
+//return 1 if radio list is empty or 0.
+int radioIsEmpty(Radio *head);
+
+int radioListGetSize(Radio *head);
+
+Radio *radioGetCurrent(RadioListInfo radio);
+
 #endif //PROJET_C_RADIOFUNC_H

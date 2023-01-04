@@ -415,20 +415,20 @@ gboolean test(gpointer data){
 
         if(ma_sound_at_end(sound)){
             printf("FIN DU SON !! ");
-            ma_sound_uninit(sound);
 
+            infos->isPlaying = 0;
+            infos->pauseTime = 0;
+            infos->totalPauseTime = 0;
+            infos->startTime = 0;
+            infos->isPaused = 1;
+            infos->wantToPause = 1;
 
+            radioNext(infos->front,infos->rear,sound);
 
-            /*radioData.rear = &radioRear;
-            radioData.front = &radioFront;
-            radioData.isPlaying = 0;
-            radioData.pauseTime = 0;
-            radioData.totalPauseTime = 0;
-            radioData.startTime = 0;
-            radioData.isPaused = 1;
-            radioData.wantToPause = 0;*/
-
-            return FALSE;
+            if(*(infos->front) == NULL){
+                return FALSE;
+            }
+            return TRUE;
         }
     }
 

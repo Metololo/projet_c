@@ -44,24 +44,3 @@ void soundFormatTime(char *string,int size,float time){
 }
 
 
-void soundSetVolume(ma_sound *sound,int volumeAction){
-    if(volumeAction != 1 && volumeAction != 0){
-        printf("ERROR, wrong volume parameter");
-        return;
-    }
-    double soundVolume;
-    soundVolume = (double) ma_sound_get_volume(sound); // Give volume ( 0 - 1)
-    printf("%lf",soundVolume);
-    switch(volumeAction) {
-        case VOLUME_UP: // 1
-            soundVolume += 0.2;
-            ma_sound_set_volume(sound, (float)soundVolume);
-            break;
-        case VOLUME_DOWN: // 0
-            soundVolume -= 0.2;
-            ma_sound_set_volume(sound,(float)soundVolume);
-            break;
-
-    }
-}
-

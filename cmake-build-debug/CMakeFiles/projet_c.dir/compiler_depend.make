@@ -367,6 +367,7 @@ CMakeFiles/projet_c.dir/main.c.obj: E:/projets\ git/projetC/projetC/main.c \
   E:/projets\ git/projetC/projetC/structures.h \
   E:/projets\ git/projetC/projetC/settings_func.h \
   E:/projets\ git/projetC/projetC/radiofunc.h \
+  E:/projets\ git/projetC/projetC/struct_func.h \
   E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtk.h \
   E:/MSYS2/mingw64/include/gtk-3.0/gdk/gdk.h \
   E:/MSYS2/mingw64/include/gtk-3.0/gdk/gdkconfig.h \
@@ -1040,15 +1041,7 @@ CMakeFiles/projet_c.dir/main.c.obj: E:/projets\ git/projetC/projetC/main.c \
   E:/MSYS2/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
   E:/MSYS2/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
   E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h \
-  E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkx.h \
-  E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtksocket.h \
-  E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkplug.h \
-  E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkx-autocleanups.h \
-  E:/MSYS2/mingw64/include/unistd.h \
-  E:/MSYS2/mingw64/include/process.h \
-  E:/MSYS2/mingw64/include/corecrt_startup.h \
-  E:/MSYS2/mingw64/include/getopt.h \
-  E:/MSYS2/mingw64/include/pthread_unistd.h
+  E:/projets\ git/projetC/projetC/gtk_functions.h
 
 CMakeFiles/projet_c.dir/radiofunc.c.obj: E:/projets\ git/projetC/projetC/radiofunc.c \
   E:/MSYS2/mingw64/include/stdio.h \
@@ -1072,10 +1065,13 @@ CMakeFiles/projet_c.dir/radiofunc.c.obj: E:/projets\ git/projetC/projetC/radiofu
   E:/MSYS2/mingw64/include/errno.h \
   E:/projets\ git/projetC/projetC/struct_func.h \
   E:/projets\ git/projetC/projetC/structures.h \
-  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mysql.h \
+  E:/projets\ git/projetC/projetC/miniaudio.h \
+  E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stddef.h \
+  E:/MSYS2/mingw64/include/stddef.h \
   E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stdarg.h \
   E:/MSYS2/mingw64/include/stdarg.h \
   E:/MSYS2/mingw64/include/_mingw_stdarg.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mysql.h \
   E:/MSYS2/mingw64/include/sys/types.h \
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_com.h \
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_version.h \
@@ -1084,9 +1080,6 @@ CMakeFiles/projet_c.dir/radiofunc.c.obj: E:/projets\ git/projetC/projetC/radiofu
   E:/MSYS2/mingw64/include/ctype.h \
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h \
   E:/projets\ git/projetC/projetC/db_func.h \
-  E:/projets\ git/projetC/projetC/miniaudio.h \
-  E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stddef.h \
-  E:/MSYS2/mingw64/include/stddef.h \
   E:/MSYS2/mingw64/include/string.h \
   E:/MSYS2/mingw64/include/sec_api/string_s.h \
   E:/projets\ git/projetC/projetC/audio_func.h \
@@ -1119,6 +1112,20 @@ CMakeFiles/projet_c.dir/settings_func.c.obj: E:/projets\ git/projetC/projetC/set
   E:/MSYS2/mingw64/include/errno.h \
   E:/projets\ git/projetC/projetC/settings_func.h \
   E:/projets\ git/projetC/projetC/structures.h \
+  E:/projets\ git/projetC/projetC/miniaudio.h \
+  E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stddef.h \
+  E:/MSYS2/mingw64/include/stddef.h \
+  E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stdarg.h \
+  E:/MSYS2/mingw64/include/stdarg.h \
+  E:/MSYS2/mingw64/include/_mingw_stdarg.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mysql.h \
+  E:/MSYS2/mingw64/include/sys/types.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_com.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_version.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/ma_list.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h \
+  E:/MSYS2/mingw64/include/ctype.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h \
   E:/MSYS2/mingw64/include/string.h \
   E:/MSYS2/mingw64/include/sec_api/string_s.h
 
@@ -1143,6 +1150,20 @@ CMakeFiles/projet_c.dir/struct_func.c.obj: E:/projets\ git/projetC/projetC/struc
   E:/MSYS2/mingw64/include/swprintf.inl \
   E:/MSYS2/mingw64/include/sec_api/stdio_s.h \
   E:/projets\ git/projetC/projetC/structures.h \
+  E:/projets\ git/projetC/projetC/miniaudio.h \
+  E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stddef.h \
+  E:/MSYS2/mingw64/include/stddef.h \
+  E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stdarg.h \
+  E:/MSYS2/mingw64/include/stdarg.h \
+  E:/MSYS2/mingw64/include/_mingw_stdarg.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mysql.h \
+  E:/MSYS2/mingw64/include/sys/types.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_com.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_version.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/ma_list.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h \
+  E:/MSYS2/mingw64/include/ctype.h \
+  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h \
   E:/MSYS2/mingw64/include/string.h \
   E:/MSYS2/mingw64/include/sec_api/string_s.h
 
@@ -2203,6 +2224,12 @@ E:/MSYS2/mingw64/include/mmreg.h:
 
 E:/projets\ git/projetC/projetC/settings_func.h:
 
+E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkgesturemultipress.h:
+
+E:/projets\ git/projetC/projetC/struct_func.h:
+
+E:/MSYS2/mingw64/include/glib-2.0/glib/goption.h:
+
 E:/MSYS2/mingw64/include/glib-2.0/gio/ginetsocketaddress.h:
 
 E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtk.h:
@@ -2322,12 +2349,6 @@ E:/MSYS2/mingw64/include/glib-2.0/gio/gfilterinputstream.h:
 E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkexpander.h:
 
 E:/MSYS2/mingw64/include/glib-2.0/glib/gvarianttype.h:
-
-E:/projets\ git/projetC/projetC/struct_func.h:
-
-E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkgesturemultipress.h:
-
-E:/MSYS2/mingw64/include/glib-2.0/glib/goption.h:
 
 E:/MSYS2/mingw64/include/glib-2.0/glib/gpattern.h:
 
@@ -2489,8 +2510,6 @@ E:/MSYS2/mingw64/include/glib-2.0/gio/gdbusnamewatching.h:
 
 E:/MSYS2/mingw64/include/glib-2.0/gio/gdbusobjectmanager.h:
 
-E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkx-autocleanups.h:
-
 E:/MSYS2/mingw64/include/glib-2.0/gio/gdbusobjectskeleton.h:
 
 E:/MSYS2/mingw64/include/glib-2.0/gio/gdbusserver.h:
@@ -2564,6 +2583,8 @@ E:/MSYS2/mingw64/include/glib-2.0/gio/gsimpleaction.h:
 E:/MSYS2/mingw64/include/glib-2.0/gio/gsimpleactiongroup.h:
 
 E:/MSYS2/mingw64/include/glib-2.0/gio/gsimpleasyncresult.h:
+
+E:/projets\ git/projetC/projetC/gtk_functions.h:
 
 E:/MSYS2/mingw64/include/pango-1.0/pango/pango-color.h:
 
@@ -3058,11 +3079,5 @@ E:/MSYS2/mingw64/include/gtk-3.0/gtk/deprecated/gtkvpaned.h:
 E:/MSYS2/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h:
 
 E:/MSYS2/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
-
-E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkx.h:
-
-E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtksocket.h:
-
-E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkplug.h:
 
 E:/projets\ git/projetC/projetC/radiofunc.c:

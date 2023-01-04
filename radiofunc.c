@@ -33,6 +33,7 @@ void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
 
     if(mysql_num_rows(res) == 0){
         printf("NO SOUND");
+        mysql_free_result(res);
         return;
     }
 
@@ -48,6 +49,7 @@ void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
         Enqueue(front,rear,id,name,genre,duration,path);
 
     }
+    mysql_free_result(res);
 }
 
 
@@ -87,11 +89,11 @@ void radioPlay(Music **front,Music **rear,ma_engine *engine,ma_sound *sound){
 
 
         while(!ma_sound_at_end(sound)){
-            sleep(1);
+            sleep(5);
         }
 
-        radioNext(front,rear,sound);
-        printf("\n\n NEXT SONG.....\n\n");
+        //radioNext(front,rear,sound);
+
 
         currentSong = getFront(front);
     }
@@ -124,9 +126,6 @@ void radioListInit(MYSQL *mysql,Radio **head,Radio **tail){
         return;
     }
 
-    *tail = NULL;
-    *head = NULL;
-
     res = mysql_store_result(mysql);
     while((row = mysql_fetch_row(res))){
         int id = atoi(row[0]);
@@ -141,6 +140,41 @@ void radioListInit(MYSQL *mysql,Radio **head,Radio **tail){
         }
 
     }
+    mysql_free_result(res);
+}
+
+int radioListDelete(Radio **head,int id){
+    Radio *temp = *head;
+    Radio *temp2 = NULL;
+
+    if(temp->id == id){
+        *head = temp->next;
+        free(temp);
+        return 1;
+    }
+
+    while(temp != NULL){
+        if(temp->id == id){
+
+            if(temp->next == NULL){
+                temp->prev->next = NULL;
+                free(temp);
+                return 1;
+            }
+
+         temp2 = temp->prev;
+         temp2->next = temp->next;
+         temp->next->prev=temp2;
+         free(temp);
+         return 1;
+        }
+        temp = temp->next;
+    }
+    return 0;
+}
+
+void radioListDeleteAll(Radio **head){
+
 }
 
 int radioIsEmpty(Radio *head){

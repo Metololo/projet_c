@@ -37,7 +37,12 @@ SETTING *settingsInit(){
     if(paramNumbers == 0) return NULL;
     char temp[LINE_MAX_LENGTH];
     SETTING *settings = malloc(sizeof(SETTING) * paramNumbers);
-    if(settings == NULL) return NULL;
+
+
+    if(settings == NULL){
+        free(settings);
+        return NULL;
+    }
     char buffer[LINE_MAX_LENGTH];
     char *position;
     FILE *conf = NULL;

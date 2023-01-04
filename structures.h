@@ -4,6 +4,10 @@
 
 #ifndef PROJET_C_STRUCTURES_H
 #define PROJET_C_STRUCTURES_H
+
+#include "miniaudio.h"
+#include <mysql/mysql.h>
+
 #define MUSIC_NAME_SIZE 101
 #define MUSIC_GENRE_SIZE 31
 #define PATH_SIZE 501
@@ -37,6 +41,22 @@ struct RadioListInfo{
     int pos;
     Radio *radioListHead;
     Radio *radioListTail;
+};
+
+typedef struct DataPLAY DataPLAY;
+
+struct DataPLAY{
+    Music **front;
+    Music **rear;
+    ma_engine *engine;
+    ma_sound *sound;
+    int isPlaying;
+    int isPaused;
+    int wantToPause;
+    double volume;
+    time_t startTime;
+    time_t totalPauseTime;
+    time_t pauseTime;
 };
 
 #endif //PROJET_C_STRUCTURES_H

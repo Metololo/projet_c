@@ -228,6 +228,7 @@ CMakeFiles/projet_c.dir/main.c.obj: \
  E:\projets\ git\projetC\projetC\structures.h \
  E:\projets\ git\projetC\projetC\settings_func.h \
  E:\projets\ git\projetC\projetC\radiofunc.h \
+ E:\projets\ git\projetC\projetC\struct_func.h \
  E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtk.h \
  E:/MSYS2/mingw64/include/gtk-3.0/gdk/gdk.h \
  E:/MSYS2/mingw64/include/gtk-3.0/gdk/gdkconfig.h \
@@ -900,11 +901,4 @@ CMakeFiles/projet_c.dir/main.c.obj: \
  E:/MSYS2/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  E:/MSYS2/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h \
- E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkx.h \
- E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtksocket.h \
- E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkplug.h \
- E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkx-autocleanups.h \
- E:/MSYS2/mingw64/include/unistd.h E:/MSYS2/mingw64/include/process.h \
- E:/MSYS2/mingw64/include/corecrt_startup.h \
- E:/MSYS2/mingw64/include/getopt.h \
- E:/MSYS2/mingw64/include/pthread_unistd.h
+ E:\projets\ git\projetC\projetC\gtk_functions.h

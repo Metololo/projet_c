@@ -33,4 +33,7 @@ int radioListGetSize(Radio *head);
 
 Radio *radioGetCurrent(RadioListInfo radio);
 
+// Delete a radio in the radioList;
+int radioListDelete(Radio **head,int id);
+
 #endif //PROJET_C_RADIOFUNC_H

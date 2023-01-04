@@ -19,5 +19,19 @@ CMakeFiles/projet_c.dir/settings_func.c.obj: \
  E:/MSYS2/mingw64/include/errno.h \
  E:\projets\ git\projetC\projetC\settings_func.h \
  E:\projets\ git\projetC\projetC\structures.h \
+ E:\projets\ git\projetC\projetC\miniaudio.h \
+ E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stddef.h \
+ E:/MSYS2/mingw64/include/stddef.h \
+ E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stdarg.h \
+ E:/MSYS2/mingw64/include/stdarg.h \
+ E:/MSYS2/mingw64/include/_mingw_stdarg.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mysql.h \
+ E:/MSYS2/mingw64/include/sys/types.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_com.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_version.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/ma_list.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h \
+ E:/MSYS2/mingw64/include/ctype.h \
+ E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h \
  E:/MSYS2/mingw64/include/string.h \
  E:/MSYS2/mingw64/include/sec_api/string_s.h

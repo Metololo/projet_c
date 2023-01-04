@@ -38,7 +38,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button">
+                  <object class="GtkButton" id="next-radio">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
@@ -60,7 +60,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button2">
+                  <object class="GtkButton" id="prev-radio">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
@@ -82,13 +82,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkProgressBar">
+                  <object class="GtkProgressBar" id="timer-bar">
                     <property name="name">progress-bar</property>
                     <property name="width-request">475</property>
                     <property name="height-request">8</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="fraction">0.40</property>
+                    <property name="fraction">0.01</property>
                   </object>
                   <packing>
                     <property name="x">261</property>
@@ -96,16 +96,16 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton">
+                  <object class="GtkButton" id="pause-button">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="tooltip-text" translatable="yes">Pause</property>
                     <child>
-                      <object class="GtkImage">
+                      <object class="GtkImage" id="pause-image">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixbuf">images\pause.png</property>
+                        <property name="pixbuf">images\play.png</property>
                       </object>
                     </child>
                     <style>
@@ -118,7 +118,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVolumeButton">
+                  <object class="GtkVolumeButton" id="volume-button">
                     <property name="name">volume</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
@@ -131,7 +131,7 @@ audio-volume-high-symbolic
 audio-volume-low-symbolic
 audio-volume-medium-symbolic</property>
                     <child internal-child="plus_button">
-                      <object class="GtkButton">
+                      <object class="GtkButton" id="volume-up">
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="halign">center</property>
@@ -140,7 +140,7 @@ audio-volume-medium-symbolic</property>
                       </object>
                     </child>
                     <child internal-child="minus_button">
-                      <object class="GtkButton">
+                      <object class="GtkButton" id="volume-down">
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="halign">center</property>
@@ -155,10 +155,10 @@ audio-volume-medium-symbolic</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkLabel" id="sound-timer">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">1:20</property>
+                    <property name="label" translatable="yes">0:00</property>
                     <attributes>
                       <attribute name="font-desc" value="Inter 10"/>
                       <attribute name="weight" value="medium"/>
@@ -173,10 +173,10 @@ audio-volume-medium-symbolic</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkLabel" id="sound-duration">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">3:23</property>
+                    <property name="label" translatable="yes">0:00</property>
                     <attributes>
                       <attribute name="font-desc" value="Inter 10"/>
                       <attribute name="weight" value="medium"/>
@@ -191,10 +191,10 @@ audio-volume-medium-symbolic</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label1">
+                  <object class="GtkLabel" id="music-name">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Thriller</property>
+                    <property name="label" translatable="yes">No music</property>
                     <attributes>
                       <attribute name="font-desc" value="Inter Bold 13"/>
                     </attributes>
@@ -208,11 +208,10 @@ audio-volume-medium-symbolic</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkLabel" id="music-genre">
                     <property name="name">song-genre</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">pop</property>
                     <attributes>
                       <attribute name="font-desc" value="Inter 10"/>
                     </attributes>

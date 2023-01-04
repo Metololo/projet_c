@@ -25,12 +25,6 @@ void soundPause(ma_sound *sound, time_t *pause);
 // play a sound, and actualize the pause Time.
 void soundPlay(ma_sound *sound,time_t *pauseTime,time_t *totalPause);
 
-// -- soundSetVolume --
-// change de volume of the sound
-// VOLUME_UP or 1 to make it sound higher
-// VOLUME_DOWN or 0 to make it sound lower
-void soundSetVolume(ma_sound *sound,int volumeAction);
-
 // -- soundFormatTime
 // -- convert a float time in seconds to a string with format : "MM:SS" ( ex 125 seconds -> 02:05 )
 void soundFormatTime(char *string,int size,float time);

@@ -1,4 +1,4 @@
-defaultVolume:3
+defaultVolume:5
 
 #ablabalba
 poupou:poupou

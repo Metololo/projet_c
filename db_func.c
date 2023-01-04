@@ -124,12 +124,15 @@ int getMusicId(MYSQL *mysql,char *music){
     }
     MYSQL_ROW row;
     row = mysql_fetch_row(res);
+    mysql_free_result(res);
     if(row){
         musicID = atoi(row[0]);
     }else{
         fprintf(stderr,"NO MUSIC FOUND FOR getRadioID : %s\n",music);
         return 0;
     }
+
+
     return musicID;
 }
 
@@ -209,6 +212,7 @@ int getRadioID(MYSQL *mysql,char *radio){
     }
     MYSQL_ROW row;
     row = mysql_fetch_row(res);
+    mysql_free_result(res);
     if(row){
         radioID = atoi(row[0]);
     }else{

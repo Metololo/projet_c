@@ -14,9 +14,6 @@ void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear);
 // Free all nodes from the radio Queue..
 void radioStop(Music **front,Music **rear);
 
-// Play the first song in the QUEUE
-void radioPlay(Music **front,Music **rear,ma_engine *engine,ma_sound *sound);
-
 // free the Node of the finished song..
 void radioNext(Music **front,Music **rear,ma_sound *sound);
 
@@ -29,11 +26,11 @@ void radioListInit(MYSQL *mysql,Radio **head,Radio **tail);
 //return 1 if radio list is empty or 0.
 int radioIsEmpty(Radio *head);
 
-int radioListGetSize(Radio *head);
-
-Radio *radioGetCurrent(RadioListInfo radio);
-
 // Delete a radio in the radioList;
-int radioListDelete(Radio **head,int id);
+int radioListDelete(Radio **head,Radio **tail,int id);
+
+void radioListInsert(Radio **head,Radio **tail,Radio *radio);
+
+void radioListDeleteAll(Radio **head,Radio **tail);
 
 #endif //PROJET_C_RADIOFUNC_H

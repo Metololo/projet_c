@@ -94,12 +94,19 @@ CMakeFiles/projet_c.dir/main.c.obj: E:/projets\ git/projetC/projetC/main.c \
   E:/MSYS2/mingw64/include/_mingw_off_t.h \
   E:/MSYS2/mingw64/include/swprintf.inl \
   E:/MSYS2/mingw64/include/sec_api/stdio_s.h \
+  E:/MSYS2/mingw64/include/stdlib.h \
+  E:/MSYS2/mingw64/include/corecrt_wstdlib.h \
+  E:/MSYS2/mingw64/include/limits.h \
+  E:/MSYS2/mingw64/include/crtdefs.h \
+  E:/MSYS2/mingw64/include/sec_api/stdlib_s.h \
+  E:/MSYS2/mingw64/include/malloc.h \
+  E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/mm_malloc.h \
+  E:/MSYS2/mingw64/include/errno.h \
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mysql.h \
   E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stdarg.h \
   E:/MSYS2/mingw64/include/stdarg.h \
   E:/MSYS2/mingw64/include/_mingw_stdarg.h \
   E:/MSYS2/mingw64/include/sys/types.h \
-  E:/MSYS2/mingw64/include/crtdefs.h \
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_com.h \
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_version.h \
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/ma_list.h \
@@ -110,13 +117,11 @@ CMakeFiles/projet_c.dir/main.c.obj: E:/projets\ git/projetC/projetC/main.c \
   E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stddef.h \
   E:/MSYS2/mingw64/include/stddef.h \
   E:/MSYS2/mingw64/include/assert.h \
-  E:/MSYS2/mingw64/include/limits.h \
   E:/MSYS2/mingw64/include/math.h \
   E:/MSYS2/mingw64/include/strings.h \
   E:/MSYS2/mingw64/include/string.h \
   E:/MSYS2/mingw64/include/sec_api/string_s.h \
   E:/MSYS2/mingw64/include/wchar.h \
-  E:/MSYS2/mingw64/include/corecrt_wstdlib.h \
   E:/MSYS2/mingw64/include/_mingw_stat64.h \
   E:/MSYS2/mingw64/include/sec_api/wchar_s.h \
   E:/MSYS2/mingw64/include/windows.h \
@@ -174,11 +179,6 @@ CMakeFiles/projet_c.dir/main.c.obj: E:/projets\ git/projetC/projetC/main.c \
   E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/immintrin.h \
   E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/mmintrin.h \
   E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/xmmintrin.h \
-  E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/mm_malloc.h \
-  E:/MSYS2/mingw64/include/stdlib.h \
-  E:/MSYS2/mingw64/include/sec_api/stdlib_s.h \
-  E:/MSYS2/mingw64/include/malloc.h \
-  E:/MSYS2/mingw64/include/errno.h \
   E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/emmintrin.h \
   E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/pmmintrin.h \
   E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/tmmintrin.h \
@@ -1083,6 +1083,7 @@ CMakeFiles/projet_c.dir/radiofunc.c.obj: E:/projets\ git/projetC/projetC/radiofu
   E:/MSYS2/mingw64/include/string.h \
   E:/MSYS2/mingw64/include/sec_api/string_s.h \
   E:/projets\ git/projetC/projetC/audio_func.h \
+  E:/projets\ git/projetC/projetC/radiofunc.h \
   E:/MSYS2/mingw64/include/unistd.h \
   E:/MSYS2/mingw64/include/io.h \
   E:/MSYS2/mingw64/include/process.h \

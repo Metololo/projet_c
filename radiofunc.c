@@ -12,6 +12,7 @@
 #include <string.h>
 #include "miniaudio.h"
 #include "audio_func.h"
+#include "radiofunc.h"
 #include <unistd.h>
 
 
@@ -58,47 +59,6 @@ void radioNext(Music **front,Music **rear,ma_sound *sound){
     ma_sound_uninit(sound);
 }
 
-void radioPlay(Music **front,Music **rear,ma_engine *engine,ma_sound *sound){
-    if(isEmpty(*front)){
-        fprintf(stderr,"Aucun son dans la radio\n");
-        return;
-    }
-    float timer;
-    time_t startTime = 0; // Store the time when the sound started
-    time_t totalPauseTime = 0; // total pause time
-    Music *currentSong = getFront(front);
-    ma_result result;
-    time_t pauseTime = 0;
-    char duration[50];
-    char timeNow[50];
-
-   while(*front != NULL){
-        result = ma_sound_init_from_file(engine,currentSong->path, 0, NULL, NULL, sound);
-        if (result != MA_SUCCESS) {
-            return;
-        }
-       soundStart(sound,&startTime);
-
-       printf("----PLAYING----\n");
-       printf("--NAME : %s --\n",currentSong->name);
-       printf("-- GENRE : %s --\n",currentSong->genre);
-       soundFormatTime(duration,50,(float) currentSong->duration);
-
-       printf("-- %s : %s --\n",timeNow,duration);
-       int choice;
-
-
-        while(!ma_sound_at_end(sound)){
-            sleep(5);
-        }
-
-        //radioNext(front,rear,sound);
-
-
-        currentSong = getFront(front);
-    }
-
-}
 
 void radioStop(Music **front,Music **rear){
     while(!isEmpty(*front)){
@@ -130,21 +90,30 @@ void radioListInit(MYSQL *mysql,Radio **head,Radio **tail){
     while((row = mysql_fetch_row(res))){
         int id = atoi(row[0]);
         Radio *newRadio = addRadio(id,row[1],row[2]);
-        if((*head) == NULL){
-           (*head) = newRadio;
-            (*tail) = newRadio;
-        }else{
-            (*head)->prev = newRadio;
-            newRadio->next = (*head);
-            (*head) = newRadio;
-        }
-
+        radioListInsert(head,tail,newRadio);
     }
     mysql_free_result(res);
 }
 
-int radioListDelete(Radio **head,int id){
-    Radio *temp = *head;
+void radioListInsert(Radio **head,Radio **tail,Radio *radio){
+
+    if(*tail == NULL) {
+        *tail = radio;
+        *head = radio;
+        radio->next = radio->prev = *head;
+        return;
+    }
+
+    (*head)->prev = radio;
+    radio->next = *head;
+    radio->prev = *tail;
+    *head = radio;
+    (*tail)->next = radio;
+
+}
+
+int radioListDelete(Radio **head,Radio **tail,int id){
+    Radio *temp = NULL;
     Radio *temp2 = NULL;
 
     if(temp->id == id){
@@ -153,47 +122,39 @@ int radioListDelete(Radio **head,int id){
         return 1;
     }
 
-    while(temp != NULL){
+    for(temp = *head;temp != *tail;temp=temp->next){
         if(temp->id == id){
-
-            if(temp->next == NULL){
-                temp->prev->next = NULL;
-                free(temp);
+            if(*head == NULL){
                 return 1;
             }
-
-         temp2 = temp->prev;
-         temp2->next = temp->next;
-         temp->next->prev=temp2;
-         free(temp);
-         return 1;
+            if(temp == *head && temp == *tail){
+                *head = NULL;
+                *tail = NULL;
+            }else{
+                *head = temp->next;
+                (*tail)->next = *head;
+            }
+            free(temp);
+            return 1;
         }
-        temp = temp->next;
     }
     return 0;
 }
 
-void radioListDeleteAll(Radio **head){
+void radioListDeleteAll(Radio **head,Radio **tail){
+    Radio *temp = NULL;
+    (*tail)->next = NULL;
+    *tail = NULL;
 
+
+    while (*head != NULL){
+         temp = *head;
+         *head = temp->next;
+        free(temp);
+    }
 }
 
 int radioIsEmpty(Radio *head){
     return head == NULL ? 1 : 0;
 }
 
-int radioListGetSize(Radio *head){
-    int counter = 0;
-    while(head != NULL){
-        head = head->next;
-        ++counter;
-    }
-    return counter;
-}
-
-
-Radio *radioGetCurrent(RadioListInfo radio){
-    for(int i = radio.pos;i>0;++i){
-        radio.radioListHead = radio.radioListHead->next;
-    }
-    return radio.radioListHead;
-}

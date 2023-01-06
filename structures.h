@@ -35,12 +35,14 @@ struct Radio{
     Radio *prev;
 };
 
+
 typedef struct RadioListInfo RadioListInfo;
 
 struct RadioListInfo{
-    int pos;
+    Radio *current;
     Radio *radioListHead;
     Radio *radioListTail;
+
 };
 
 typedef struct DataPLAY DataPLAY;

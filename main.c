@@ -1,6 +1,7 @@
 #define MINIAUDIO_IMPLEMENTATION
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <mysql/mysql.h>
 #include "miniaudio.h"
 #include "audio_func.h"
@@ -45,7 +46,7 @@ int main(int argc,char **argv) {
     Radio *radioListHead = NULL; // Head of the radio list
     Radio *radioListTail = NULL; // Tail of the radio list
 
-    Radio *currentRadio; // This is a pointer to the current Radio playing
+    Radio *currentRadio = NULL; // This is a pointer to the current Radio playing
 
     Music *radioFront = NULL; // The front of the music Queue ( ex :  I'm in radio "rock1", this is the first music that should play
     Music *radioRear = NULL; // The tail of the music Queue
@@ -109,10 +110,9 @@ int main(int argc,char **argv) {
     // INIT RADIO LIST ( start at radioListHead ) with name,genre,id.
     // -----------------------------
 
-    radiosInfos.pos = 0;
-
     radioListInit(mysql,&radioListHead,&radioListTail);
 
+    radiosInfos.current = radioListHead;
     radiosInfos.radioListHead = radioListHead;
     radiosInfos.radioListTail = radioListTail;
 
@@ -125,7 +125,6 @@ int main(int argc,char **argv) {
     //------------------
     // Initialize the radioData structure.
     //------------------
-
     radioData.sound = &sound;
     radioData.engine = &engine;
     radioData.rear = &radioRear;
@@ -192,8 +191,6 @@ int main(int argc,char **argv) {
         gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) radioListHead->name);
     }
 
-
-
     g_timeout_add(200, test, &radioData);
 
 
@@ -204,6 +201,8 @@ int main(int argc,char **argv) {
     mysql_close(mysql);
     ma_engine_uninit(&engine);
     free(settings);
+    radioStop(&radioFront,&radioRear);
+    radioListDeleteAll(&radioListHead,&radioListTail);
 
 
 
@@ -298,17 +297,9 @@ void next_radio_clicked(GtkButton *b, gpointer user_data){
         return;
     }
 
-    if(list->pos+1 < radioListGetSize(list->radioListHead))  list->pos++;
-    int i = list->pos;
-    Radio *temp = list->radioListHead;
+    list->current = list->current->next;
 
-    for(i= list->pos;i>0;--i){
-        if(temp == NULL) return;
-        temp = temp->next;
-    }
-    if(temp == NULL) return;
-
-    gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) temp->name);
+    gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) list->current->name);
 }
 
 
@@ -321,19 +312,9 @@ void prev_radio_clicked(GtkButton *b, gpointer user_data){
         return;
     }
 
-    if(list->pos > 0) list->pos--;
-    int i = list->pos;
-    Radio *temp = list->radioListHead;
+    list->current = list->current->prev;
 
-    for(i=list->pos;i>0;--i){
-        if(temp == NULL) return;
-        temp = temp->next;
-    }
-    if(temp == NULL) return;
-
-
-
-    gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) temp->name);
+    gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) list->current->name);
 }
 
 void pauseSound(GtkButton *b, gpointer user_data){

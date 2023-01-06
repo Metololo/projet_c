@@ -37,6 +37,7 @@ CMakeFiles/projet_c.dir/radiofunc.c.obj: \
  E:/MSYS2/mingw64/include/string.h \
  E:/MSYS2/mingw64/include/sec_api/string_s.h \
  E:\projets\ git\projetC\projetC\audio_func.h \
+ E:\projets\ git\projetC\projetC\radiofunc.h \
  E:/MSYS2/mingw64/include/unistd.h E:/MSYS2/mingw64/include/io.h \
  E:/MSYS2/mingw64/include/process.h \
  E:/MSYS2/mingw64/include/corecrt_startup.h \

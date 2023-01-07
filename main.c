@@ -35,17 +35,16 @@ G_MODULE_EXPORT void next_radio_clicked(GtkButton *b, gpointer user_data);
 G_MODULE_EXPORT void prev_radio_clicked(GtkButton *b, gpointer user_data);
 G_MODULE_EXPORT gboolean test(gpointer data);
 G_MODULE_EXPORT void pauseSound(GtkButton *b, gpointer user_data);
+void setRadioNoSound(DataPLAY *infos);
+
+int radioChange(DataPLAY *list,int move);
 
 int main(int argc,char **argv) {
-
-
-    RadioListInfo radiosInfos; // Store the position of the current radio playing, the head of the radio list, and
 
     DataPLAY radioData; // Structure used to be passed to callbacks functions for gtk ( many infos )
 
     Radio *radioListHead = NULL; // Head of the radio list
     Radio *radioListTail = NULL; // Tail of the radio list
-
     Radio *currentRadio = NULL; // This is a pointer to the current Radio playing
 
     Music *radioFront = NULL; // The front of the music Queue ( ex :  I'm in radio "rock1", this is the first music that should play
@@ -112,9 +111,10 @@ int main(int argc,char **argv) {
 
     radioListInit(mysql,&radioListHead,&radioListTail);
 
-    radiosInfos.current = radioListHead;
-    radiosInfos.radioListHead = radioListHead;
-    radiosInfos.radioListTail = radioListTail;
+
+    radioData.current = radioListHead;
+    radioData.radioListHead = radioListHead;
+    radioData.radioListTail = radioListTail;
 
     //------------------
     // Then we INIT the music list of the first radio
@@ -129,12 +129,15 @@ int main(int argc,char **argv) {
     radioData.engine = &engine;
     radioData.rear = &radioRear;
     radioData.front = &radioFront;
+    radioData.isSwitching = 0;
+    radioData.soundInitialized = 0;
     radioData.isPlaying = 0;
     radioData.pauseTime = 0;
     radioData.totalPauseTime = 0;
     radioData.startTime = 0;
     radioData.isPaused = 1;
     radioData.wantToPause = 0;
+    radioData.mysql = mysql;
 
     // We get the default volume
     settingsPos = settingsGetParamLine(settings,"defaultVolume");
@@ -177,8 +180,8 @@ int main(int argc,char **argv) {
     pauseImage = GTK_WIDGET(gtk_builder_get_object(builder, "pause-image"));
 
 
-    g_signal_connect(next_radio, "clicked", G_CALLBACK(next_radio_clicked), &radiosInfos);
-    g_signal_connect(prev_radio, "clicked", G_CALLBACK(prev_radio_clicked), &radiosInfos);
+    g_signal_connect(next_radio, "clicked", G_CALLBACK(next_radio_clicked), &radioData);
+    g_signal_connect(prev_radio, "clicked", G_CALLBACK(prev_radio_clicked), &radioData);
     g_signal_connect(pauseButton, "clicked", G_CALLBACK(pauseSound), &radioData);
     g_signal_connect(pauseButton, "clicked", G_CALLBACK(pauseSound), &radioData);
 
@@ -290,31 +293,80 @@ int main(int argc,char **argv) {
 }
 
 void next_radio_clicked(GtkButton *b, gpointer user_data){
-    struct RadioListInfo *list = (struct RadioListInfo *) user_data;
+    DataPLAY *list = (DataPLAY *) user_data;
 
     if(list->radioListHead == NULL){
         gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) "No radio created");
         return;
     }
+    if(list->isSwitching) return;
+    list->isSwitching = 1;
 
-    list->current = list->current->next;
 
-    gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) list->current->name);
+    int radioRes = radioChange(list,1);
+    switch(radioRes){
+        case 0:
+        case 2:
+            printf("I AM HERE");
+            list->soundInitialized = 0;
+            setRadioNoSound(list);
+            break;
+    }
+    list->isSwitching = 0;
 }
 
 
 
 void prev_radio_clicked(GtkButton *b, gpointer user_data){
-    struct RadioListInfo *list = (struct RadioListInfo *) user_data;
+    DataPLAY *list = (DataPLAY *) user_data;
 
     if(list->radioListHead == NULL){
         gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) "No radio created");
         return;
     }
 
-    list->current = list->current->prev;
+    if(list->isSwitching) return;
+    list->isSwitching = 1;
+
+    int radioRes = radioChange(list,-1);
+
+    switch(radioRes){
+        case 0:
+        case 2:
+            printf("I AM HERE");
+            list->soundInitialized = 0;
+            setRadioNoSound(list);
+            break;
+    }
+
+    list->isSwitching = 0;
+
+}
+
+int radioChange(DataPLAY *list,int move){
+    if(move == 1) list->current = list->current->next;
+    if(move == -1) list->current = list->current->prev;
+
+    radioStop(list->front,list->rear);
+
+    if(list->soundInitialized == 1){
+        ma_sound_uninit(list->sound);
+    }
+    int radioRes = radioInit(list->mysql,list->current->name,list->front,list->rear);
+
+    if(radioRes == 0 || radioRes == 2){
+        return radioRes;
+    }
+    list->isPlaying = 0;
+    list->pauseTime = 0;
+    list->totalPauseTime = 0;
+    list->startTime = 0;
+    list->isPaused = 1;
+    list->wantToPause = 1;
 
     gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) list->current->name);
+    return 1;
+
 }
 
 void pauseSound(GtkButton *b, gpointer user_data){
@@ -324,19 +376,38 @@ void pauseSound(GtkButton *b, gpointer user_data){
 
 }
 
+void setRadioNoSound(DataPLAY *infos){
+    gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) infos->current->name);
+    gtk_label_set_text(GTK_LABEL(musicName),(const gchar*) "No sound");
+    gtk_label_set_text(GTK_LABEL(musicGenre),(const gchar*) "");
+    gtk_label_set_text(GTK_LABEL(widgetDuration),(const gchar*) "0:00");
+    gtk_label_set_text(GTK_LABEL(widgetTimer),(const gchar*) "0:00");
+    gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(timerBar),0.0);
+}
+
 gboolean test(gpointer data){
 
     DataPLAY *infos = (DataPLAY *) data;
 
+    if(infos->isSwitching == 1){
+        return TRUE;
+    }
 
     Music **front = infos->front;
+    Music *currentSong = getFront(front);
+
+    if(currentSong == NULL){
+        setRadioNoSound(infos);
+        return TRUE;
+    }
     Music **rear = infos->rear;
     ma_engine *engine = infos->engine;
     ma_sound *sound = infos->sound;
+    MYSQL *mysql = infos->mysql;
 
     float timer = 0;
 
-    Music *currentSong = getFront(front);
+
     ma_result result;
     char duration[50];
     char timeNow[50];
@@ -347,6 +418,7 @@ gboolean test(gpointer data){
 
     if(!infos->isPlaying && infos->isPaused && infos->wantToPause){
         result = ma_sound_init_from_file(engine,currentSong->path, 0, NULL, NULL, sound);
+        infos->soundInitialized = 1;
         if (result != MA_SUCCESS) {
             return FALSE;
         }
@@ -406,19 +478,24 @@ gboolean test(gpointer data){
 
             radioNext(infos->front,infos->rear,sound);
 
-            if(*(infos->front) == NULL){
-                return FALSE;
+            if(*(infos->front) == NULL && *(infos->rear) == NULL){
+                int test = radioInit(mysql,infos->current->name,infos->front,infos->rear);
+                if(!test){
+                    fprintf(stderr,"impossible de relancer la radio : erreur");
+                    return FALSE;
+                }
             }
             return TRUE;
         }
-    }
 
-    if(!infos->isPaused){
         timer = soundGetTimer(infos->startTime,infos->totalPauseTime);
         soundFormatTime(timeNow,50,timer);
         gtk_label_set_text(GTK_LABEL(widgetTimer),(const gchar*) timeNow);
         gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(timerBar),(gdouble)pulsation*timer);
+
     }
 
     return TRUE;
+
+
 }

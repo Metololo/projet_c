@@ -9,7 +9,7 @@
 //Return the ID of a given radio name or 0 if not found or error
 
 // Create a Queue with all musics related to the radio. It doesn't start playing it....
-void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear);
+int radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear);
 
 // Free all nodes from the radio Queue..
 void radioStop(Music **front,Music **rear);

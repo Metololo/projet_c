@@ -38,20 +38,23 @@ struct Radio{
 
 typedef struct RadioListInfo RadioListInfo;
 
-struct RadioListInfo{
+
+typedef struct DataPLAY{
+
     Radio *current;
     Radio *radioListHead;
     Radio *radioListTail;
 
-};
+    int isSwitching;
 
-typedef struct DataPLAY DataPLAY;
-
-struct DataPLAY{
+    MYSQL *mysql;
     Music **front;
     Music **rear;
     ma_engine *engine;
     ma_sound *sound;
+
+    int soundInitialized;
+
     int isPlaying;
     int isPaused;
     int wantToPause;
@@ -59,7 +62,8 @@ struct DataPLAY{
     time_t startTime;
     time_t totalPauseTime;
     time_t pauseTime;
-};
+
+}DataPLAY;
 
 #endif //PROJET_C_STRUCTURES_H
 

@@ -16,7 +16,7 @@
 #include <unistd.h>
 
 
-void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
+int radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
     char buffer[150];
     MYSQL_ROW row;
     int radioID = getRadioID(mysql,radio);
@@ -25,7 +25,7 @@ void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
 
     if(mysql_query(mysql,buffer)){
         dbAddError(mysql);
-        return;
+        return 0;
     }
 
     MYSQL_RES *res = mysql_store_result(mysql);
@@ -33,9 +33,9 @@ void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
     unsigned int field = mysql_num_fields(res);
 
     if(mysql_num_rows(res) == 0){
-        printf("NO SOUND");
+        fprintf(stderr,"no sound in the radio");
         mysql_free_result(res);
-        return;
+        return 2;
     }
 
     while((row = mysql_fetch_row(res))){
@@ -51,6 +51,8 @@ void radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
 
     }
     mysql_free_result(res);
+
+    return 1;
 }
 
 

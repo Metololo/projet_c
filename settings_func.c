@@ -91,6 +91,9 @@ int settingsSet(SETTING *settings,char *param,char *value){
     FILE *conf;
     FILE *tempConf;
     char newLine[LINE_MAX_LENGTH];
+    char buffer[LINE_MAX_LENGTH];
+    int counter = 0;
+
     conf = fopen("../settings/config.txt","rt");
 
     // Create a temporary file where we will copy all config.txt
@@ -98,8 +101,7 @@ int settingsSet(SETTING *settings,char *param,char *value){
     if(conf == NULL || tempConf == NULL){
         return 0;
     }
-    char buffer[LINE_MAX_LENGTH];
-    int counter = 0;
+
     int line = settingsGetParamLine(settings,param);
     if(line == -1) return 0;
 
@@ -116,6 +118,13 @@ int settingsSet(SETTING *settings,char *param,char *value){
                     fputs(buffer,tempConf);
                 }
         ++counter;
+
+        int size = settingsGetNumber();
+        for(int i = 0;i<size;++i){
+            if(!strcmp(settings[i].param,param)){
+                strncpy(settings[i].value,value,30);
+            }
+        }
     }
 
     //Remove ancient config.txt and rename temporary file "config.txt"
@@ -126,8 +135,19 @@ int settingsSet(SETTING *settings,char *param,char *value){
     rename("../settings/temp_config.txt","../settings/config.txt");
     return counter;
 
-
 }
+
+char *settingsGetValue(SETTING *settings,char *param){
+    int size = settingsGetNumber();
+    for(int i = 0;i<size;++i){
+        if(!strcmp(settings[i].param,param)){
+            return settings[i].value;
+        }
+    }
+    return NULL;
+}
+
+
 
 int settingsGetParamLine(SETTING *settings,char *param){
     int size = settingsGetNumber();

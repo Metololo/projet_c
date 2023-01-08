@@ -33,3 +33,5 @@ int settingsSet(SETTING *settings,char *param,char *value);
 
 // Return the line of a specific parameter or -1 if not found
 int settingsGetParamLine(SETTING *settings,char *param);
+// return value of param or NULL if not found
+char *settingsGetValue(SETTING *settings,char *param);

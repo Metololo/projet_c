@@ -54,7 +54,7 @@ typedef struct DataPLAY{
     ma_sound *sound;
 
     int soundInitialized;
-
+    int changeRadio;
     int isPlaying;
     int isPaused;
     int wantToPause;

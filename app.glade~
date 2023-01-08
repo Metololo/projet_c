@@ -2,6 +2,11 @@
 <!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="upper">10</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
   <object class="GtkWindow" id="windowApp">
     <property name="name">window</property>
     <property name="width-request">1000</property>
@@ -19,7 +24,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
-              <object class="GtkFixed">
+              <object class="GtkFixed" id="page0">
                 <property name="width-request">1000</property>
                 <property name="height-request">600</property>
                 <property name="visible">True</property>
@@ -241,10 +246,243 @@ audio-volume-medium-symbolic</property>
                     <property name="y">307</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkButton" id="button-settings">
+                    <property name="name">settings-buton</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixbuf">images\settings.png</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="button"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">924</property>
+                    <property name="y">20</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="name">page0</property>
                 <property name="title" translatable="yes">page0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFixed" id="page1">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <child>
+                  <object class="GtkButton" id="leave-settings">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="tooltip-text" translatable="yes">Previous</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixbuf">images\left.png</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="button"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">20</property>
+                    <property name="y">20</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="pixbuf">images\music_logo.png</property>
+                  </object>
+                  <packing>
+                    <property name="x">51</property>
+                    <property name="y">135</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="pixbuf">images\koala_logo.png</property>
+                  </object>
+                  <packing>
+                    <property name="x">46</property>
+                    <property name="y">215</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="pixbuf">images\frog_logo.png</property>
+                  </object>
+                  <packing>
+                    <property name="x">53</property>
+                    <property name="y">295</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="pixbuf">images\monkey_logo.png</property>
+                  </object>
+                  <packing>
+                    <property name="x">53</property>
+                    <property name="y">375</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Default Volume</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Rock Salt 12"/>
+                      <attribute name="foreground" value="#ffffffffffff"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">103</property>
+                    <property name="y">133</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Radio Mode</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Rock Salt 12"/>
+                      <attribute name="foreground" value="#ffffffffffff"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">103</property>
+                    <property name="y">213</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Radio Finish</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Rock Salt 12"/>
+                      <attribute name="foreground" value="#ffffffffffff"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">103</property>
+                    <property name="y">291</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Leave A Like And Get A Surprise</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Rock Salt 12"/>
+                      <attribute name="foreground" value="#ffffffffffff"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="x">103</property>
+                    <property name="y">374</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="width-request">100</property>
+                    <property name="height-request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="pixbuf">images\radioc_logo.png</property>
+                  </object>
+                  <packing>
+                    <property name="x">725</property>
+                    <property name="y">158</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="default-volume">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="adjustment">adjustment1</property>
+                  </object>
+                  <packing>
+                    <property name="x">441</property>
+                    <property name="y">135</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="radio-finish">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="active">0</property>
+                    <items>
+                      <item translatable="yes">replay</item>
+                      <item translatable="yes">next</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">441</property>
+                    <property name="y">293</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="radio-mode">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <items>
+                      <item id="random" translatable="yes">random</item>
+                      <item id="normal" translatable="yes">normal</item>
+                    </items>
+                  </object>
+                  <packing>
+                    <property name="x">441</property>
+                    <property name="y">209</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="like-button">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <child>
+                      <object class="GtkImage" id="like-image">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixbuf">images\like_active.png</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="button"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">441</property>
+                    <property name="y">372</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">page1</property>
+                <property name="title" translatable="yes">page1</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>

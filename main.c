@@ -30,12 +30,25 @@ GtkWidget *volumeButton;
 GtkWidget *volumeUp;
 GtkWidget *volumeDown;
 GtkWidget *pauseImage;
+GtkWidget *buttonSettings;
+GtkWidget *stack;
+GtkWidget *settingsMenu;
+GtkWidget *leaveSettings;
+GtkWidget *mainMenu;
+GtkWidget *radioMode;
+GtkWidget *radioFinish;
+GtkWidget *defaultVolume;
+GtkWidget *likeButton;
+GtkWidget *likeImage;
 
 G_MODULE_EXPORT void next_radio_clicked(GtkButton *b, gpointer user_data);
 G_MODULE_EXPORT void prev_radio_clicked(GtkButton *b, gpointer user_data);
 G_MODULE_EXPORT gboolean test(gpointer data);
 G_MODULE_EXPORT void pauseSound(GtkButton *b, gpointer user_data);
 void setRadioNoSound(DataPLAY *infos);
+void goSettings();
+void exitSettings(GtkButton *b, gpointer user_data);
+void likeApp();
 
 int radioChange(DataPLAY *list,int move);
 
@@ -62,6 +75,10 @@ int main(int argc,char **argv) {
 
     float soundDuration = 0; // The duration of the sound in seconds
 
+    char radioModeActive[50]; // Use to set the radioMode setting.
+    char radioFinishActive[50]; // Use to set the radioFinish setting.
+
+    char volumeValue[3];
     int choice;
     char timeNow[50]; // Use to store the timer string ( ex : 0:20 -> song is playing since 20 sec)
     char duration[50]; // Use to store the song duration string (ex : 3:20 -> the song length is 3min20)
@@ -138,10 +155,10 @@ int main(int argc,char **argv) {
     radioData.isPaused = 1;
     radioData.wantToPause = 0;
     radioData.mysql = mysql;
+    radioData.changeRadio = 0;
 
     // We get the default volume
-    settingsPos = settingsGetParamLine(settings,"defaultVolume");
-    volume = atof(settings[settingsPos].value)/10;
+    volume = atof(settingsGetValue(settings,"defaultVolume"))/10;
 
     radioData.volume = volume;
 
@@ -178,24 +195,38 @@ int main(int argc,char **argv) {
     volumeUp = GTK_WIDGET(gtk_builder_get_object(builder, "volume-up"));
     volumeDown = GTK_WIDGET(gtk_builder_get_object(builder, "volume-down"));
     pauseImage = GTK_WIDGET(gtk_builder_get_object(builder, "pause-image"));
+    buttonSettings = GTK_WIDGET(gtk_builder_get_object(builder, "button-settings"));
+    stack = GTK_WIDGET(gtk_builder_get_object(builder, "mainStack"));
+    settingsMenu = GTK_WIDGET(gtk_builder_get_object(builder, "page1"));
+    leaveSettings = GTK_WIDGET(gtk_builder_get_object(builder, "leave-settings"));
+    mainMenu = GTK_WIDGET(gtk_builder_get_object(builder, "page0"));
+    radioMode = GTK_WIDGET(gtk_builder_get_object(builder, "radio-mode"));
+    radioFinish = GTK_WIDGET(gtk_builder_get_object(builder, "radio-finish"));
+    defaultVolume = GTK_WIDGET(gtk_builder_get_object(builder, "default-volume"));
+    likeButton = GTK_WIDGET(gtk_builder_get_object(builder, "like-button"));
+    likeImage = GTK_WIDGET(gtk_builder_get_object(builder, "like-image"));
 
+    g_object_unref(builder);
 
     g_signal_connect(next_radio, "clicked", G_CALLBACK(next_radio_clicked), &radioData);
     g_signal_connect(prev_radio, "clicked", G_CALLBACK(prev_radio_clicked), &radioData);
     g_signal_connect(pauseButton, "clicked", G_CALLBACK(pauseSound), &radioData);
     g_signal_connect(pauseButton, "clicked", G_CALLBACK(pauseSound), &radioData);
+    g_signal_connect(buttonSettings, "clicked", G_CALLBACK(goSettings), NULL);
+    g_signal_connect(leaveSettings, "clicked", G_CALLBACK(exitSettings),settings);
+    g_signal_connect(likeButton, "clicked", G_CALLBACK(likeApp), NULL);
 
     gtk_scale_button_set_value(GTK_SCALE_BUTTON(volumeButton),radioData.volume);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(defaultVolume),volume*10);
 
-    g_object_unref(builder);
-
+    gtk_combo_box_set_active_id(GTK_COMBO_BOX(radioMode),settingsGetValue(settings,"radioMode"));
+    gtk_combo_box_set_active_id(GTK_COMBO_BOX(radioFinish),settingsGetValue(settings,"radioFinish"));
 
     if(!radioIsEmpty(radioListHead)){
         gtk_label_set_text(GTK_LABEL(radio_name),(const gchar*) radioListHead->name);
     }
 
     g_timeout_add(200, test, &radioData);
-
 
     gtk_widget_show(window);
     gtk_main();
@@ -207,89 +238,46 @@ int main(int argc,char **argv) {
     radioStop(&radioFront,&radioRear);
     radioListDeleteAll(&radioListHead,&radioListTail);
 
-
-
-    /*radioInit(mysql,"rap1",&radioFront,&radioRear);
-
-    Music *temp = radioFront;
-   while(temp != NULL){
-
-        printf("%d %s %s %d %s\n",temp->id,temp->name,temp->genre,temp->duration,temp->path);
-        temp = temp->next;
-    }
-
-    radioPlay(&radioFront,&radioRear,&engine,&sound);
-
-    radioStop(&radioFront,&radioRear);*/
-
-
-
-
-
-
-    //free(settings);
-
-  /*
-
-    //This function init a sound from pathfile ( doesn't play it ).
-    soundResult = ma_sound_init_from_file(&engine, "music.mp3", 0, NULL, NULL, &sound);
-    if (soundResult != MA_SUCCESS) {
-        return soundResult;
-    }
-
-
-    do {
-        printf("Bonjour !\n");
-        printf("Que souhaitez-vous faire ?\n");
-        printf("1. Lancer le son\n");
-        printf("2. Mettre en pause le son\n");
-        printf("3. Mettre en lecture le son\n");
-        printf("Volume actuel : %d\n", (int) (ma_sound_get_volume(&sound)*10));
-        printf("4. Monter le volume\n");
-        printf("5. Baisser le volume\n");
-        printf("6. Stopper le son\n");
-
-        timer = soundGetTimer(startTime,totalPauseTime);
-        soundFormatTime(timeNow,50,timer);
-        printf("Timecode : %s\n",timeNow);
-
-        ma_sound_get_length_in_seconds(&sound,&soundDuration);
-        soundFormatTime(duration,50,soundDuration);
-        printf("Duree total du son : %s\n",duration);
-
-        scanf("%d", &choice);
-
-        switch (choice) {
-            case 1:
-                soundStart(&sound, &startTime);
-                break;
-
-            case 2:
-                soundPause(&sound, &pauseTime);
-                break;
-
-            case 3:
-                soundPlay(&sound, &pauseTime, &totalPauseTime);
-                break;
-
-            case 4:
-                soundSetVolume(&sound, VOLUME_UP);
-                break;
-
-            case 5:
-                soundSetVolume(&sound, VOLUME_DOWN);
-                break;
-
-            case 6:
-                totalPauseTime = 0;
-                ma_sound_uninit(&sound);
-                break;
-        }
-    } while (choice != 0);
-
-    */
-
     return 0;
+}
+
+/* -------------------------------------------
+ *   END OF MAIN HERE
+ * -------------------------------------------
+ */
+
+/* -------------------------------------------
+ *   GTK CALLBACKS FUNCTIONS DOWN THERE
+ * -------------------------------------------
+ */
+
+
+
+void likeApp(){
+    printf("Like\n");
+}
+
+void goSettings(){
+    gtk_stack_set_visible_child(GTK_STACK(stack),settingsMenu);
+}
+
+void exitSettings(GtkButton *b, gpointer user_data){
+    SETTING *settings = (SETTING *) user_data;
+
+    char radioModeValue[50];
+    char radioFinishValue[50];
+    char defaultVolumeValue[50];
+
+    snprintf(defaultVolumeValue,50,"%.0lf",(gtk_spin_button_get_value(GTK_SPIN_BUTTON(defaultVolume))));
+    strncpy(radioModeValue, gtk_combo_box_get_active_id(GTK_COMBO_BOX(radioMode)),50);
+    strncpy(radioFinishValue, gtk_combo_box_get_active_id(GTK_COMBO_BOX(radioFinish)),50);
+
+    settingsSet(settings,"defaultVolume",defaultVolumeValue);
+    settingsSet(settings,"radioMode",radioModeValue);
+    settingsSet(settings,"radioFinish",radioFinishValue);
+
+    gtk_stack_set_visible_child(GTK_STACK(stack),mainMenu);
+
 }
 
 void next_radio_clicked(GtkButton *b, gpointer user_data){
@@ -307,7 +295,6 @@ void next_radio_clicked(GtkButton *b, gpointer user_data){
     switch(radioRes){
         case 0:
         case 2:
-            printf("I AM HERE");
             list->soundInitialized = 0;
             setRadioNoSound(list);
             break;
@@ -333,7 +320,6 @@ void prev_radio_clicked(GtkButton *b, gpointer user_data){
     switch(radioRes){
         case 0:
         case 2:
-            printf("I AM HERE");
             list->soundInitialized = 0;
             setRadioNoSound(list);
             break;
@@ -385,6 +371,25 @@ void setRadioNoSound(DataPLAY *infos){
     gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(timerBar),0.0);
 }
 
+void setRadioSound(DataPLAY *infos){
+
+    char duration[50];
+    char timeNow[50];
+    float timer = 0;
+
+    Music *currentSong = getFront(infos->front);
+    gdouble pulsation = 1.0/currentSong->duration;
+    gtk_label_set_text(GTK_LABEL(musicName),(const gchar*) currentSong->name);
+    gtk_label_set_text(GTK_LABEL(musicGenre),(const gchar*) currentSong->genre);
+    gtk_image_set_from_file((GtkImage *) pauseImage, "../images/play.png");
+
+    soundFormatTime(duration,50,(float) currentSong->duration);
+    gtk_label_set_text(GTK_LABEL(widgetDuration),(const gchar*) duration);
+
+    gtk_label_set_text(GTK_LABEL(widgetTimer),(const gchar*) "0:00");
+    gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(timerBar),(gdouble)pulsation*timer);
+}
+
 gboolean test(gpointer data){
 
     DataPLAY *infos = (DataPLAY *) data;
@@ -400,6 +405,10 @@ gboolean test(gpointer data){
         setRadioNoSound(infos);
         return TRUE;
     }
+    if(!infos->isPlaying && infos->isPaused && !infos->wantToPause) {
+        setRadioSound(infos);
+    }
+
     Music **rear = infos->rear;
     ma_engine *engine = infos->engine;
     ma_sound *sound = infos->sound;
@@ -487,11 +496,13 @@ gboolean test(gpointer data){
             }
             return TRUE;
         }
-
+    if(!infos->isPaused){
         timer = soundGetTimer(infos->startTime,infos->totalPauseTime);
         soundFormatTime(timeNow,50,timer);
         gtk_label_set_text(GTK_LABEL(widgetTimer),(const gchar*) timeNow);
         gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(timerBar),(gdouble)pulsation*timer);
+    }
+
 
     }
 

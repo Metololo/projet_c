@@ -1,6 +1,26 @@
-defaultVolume:5
+#commentaire blablaablaabl
 
-#ablabalba
-poupou:poupou
-blabla:bonjourbonuour
-ehauzhe
+defaultVolume:7
+radioMode:normal
+radioFinish:replay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

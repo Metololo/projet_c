@@ -1,4 +1,4 @@
-#window{
+.window{
     background-color: #45414B;
 }
 .coucou{
@@ -14,9 +14,47 @@
     outline: inherit;
 }
 
+.validate-button{
+    border: 2px solid white;
+    border-radius: 16px;
+    font-size: 14px;
+    color: white;
+    box-shadow: none;
+    background: transparent;
+}
+.validate-button:hover{
+    border-color: transparent;
+    color: #45414B;
+    background: #FFFFFF;
+ }
+
+
 .button:hover {
     border-color: white;
 }
+.burger_button{
+    margin-right: 8px;
+    background: #45414B;
+    color: white;
+    border: 2px solid transparent;
+    box-shadow: none;
+    border-radius: 100px;
+    outline: inherit;}
+
+.burger_button:hover {
+    border-color: transparent;
+}
+.radio_button{
+    background: #45414B;
+    border-color: transparent;
+    color: white;
+    box-shadow: none;
+    outline: inherit;
+}
+.radio_button:hover{
+
+}
+
 .pause_button{
     background: none;
     color: inherit;
@@ -62,4 +100,8 @@ progress{
     font-weight: 400;
     font-size: 9.225px;
     color: #FFFFFF;
+}
+
+.header-bar{;
+    background: #FFFFFF;
 }

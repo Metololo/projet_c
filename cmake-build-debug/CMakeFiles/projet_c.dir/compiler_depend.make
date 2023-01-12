@@ -78,7 +78,8 @@ CMakeFiles/projet_c.dir/db_func.c.obj: E:/projets\ git/projetC/projetC/db_func.c
   E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stddef.h \
   E:/MSYS2/mingw64/include/stddef.h \
   E:/projets\ git/projetC/projetC/radiofunc.h \
-  E:/projets\ git/projetC/projetC/structures.h
+  E:/projets\ git/projetC/projetC/structures.h \
+  E:/projets\ git/projetC/projetC/settings_func.h
 
 CMakeFiles/projet_c.dir/gtk_functions.c.obj: E:/projets\ git/projetC/projetC/gtk_functions.c
 
@@ -1079,6 +1080,7 @@ CMakeFiles/projet_c.dir/radiofunc.c.obj: E:/projets\ git/projetC/projetC/radiofu
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h \
   E:/MSYS2/mingw64/include/ctype.h \
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h \
+  E:/projets\ git/projetC/projetC/settings_func.h \
   E:/projets\ git/projetC/projetC/db_func.h \
   E:/MSYS2/mingw64/include/string.h \
   E:/MSYS2/mingw64/include/sec_api/string_s.h \
@@ -1165,6 +1167,7 @@ CMakeFiles/projet_c.dir/struct_func.c.obj: E:/projets\ git/projetC/projetC/struc
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h \
   E:/MSYS2/mingw64/include/ctype.h \
   E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h \
+  E:/projets\ git/projetC/projetC/settings_func.h \
   E:/MSYS2/mingw64/include/string.h \
   E:/MSYS2/mingw64/include/sec_api/string_s.h
 
@@ -1447,6 +1450,14 @@ E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/wbnoinvdintrin.h:
 
 E:/MSYS2/mingw64/include/glib-2.0/gio/gnetworkmonitor.h:
 
+E:/MSYS2/mingw64/include/glib-2.0/gio/gasyncinitable.h:
+
+E:/MSYS2/mingw64/include/glib-2.0/gio/gnativesocketaddress.h:
+
+E:/MSYS2/mingw64/include/windef.h:
+
+E:/projets\ git/projetC/projetC/settings_func.h:
+
 E:/MSYS2/mingw64/include/assert.h:
 
 E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/xtestintrin.h:
@@ -1488,12 +1499,6 @@ E:/MSYS2/mingw64/include/psdk_inc/_socket_types.h:
 E:/MSYS2/mingw64/include/glib-2.0/gio/glistmodel.h:
 
 E:/MSYS2/mingw64/include/excpt.h:
-
-E:/MSYS2/mingw64/include/glib-2.0/gio/gasyncinitable.h:
-
-E:/MSYS2/mingw64/include/glib-2.0/gio/gnativesocketaddress.h:
-
-E:/MSYS2/mingw64/include/windef.h:
 
 E:/MSYS2/mingw64/include/specstrings.h:
 
@@ -2222,8 +2227,6 @@ E:/MSYS2/mingw64/include/io.h:
 E:/MSYS2/mingw64/include/glib-2.0/gobject/gvaluetypes.h:
 
 E:/MSYS2/mingw64/include/mmreg.h:
-
-E:/projets\ git/projetC/projetC/settings_func.h:
 
 E:/MSYS2/mingw64/include/gtk-3.0/gtk/gtkgesturemultipress.h:
 

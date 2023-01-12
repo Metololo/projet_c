@@ -7,6 +7,7 @@
 
 #include "miniaudio.h"
 #include <mysql/mysql.h>
+#include "settings_func.h"
 
 #define MUSIC_NAME_SIZE 101
 #define MUSIC_GENRE_SIZE 31
@@ -35,11 +36,9 @@ struct Radio{
     Radio *prev;
 };
 
-
-typedef struct RadioListInfo RadioListInfo;
-
-
 typedef struct DataPLAY{
+
+    SETTING *settings;
 
     Radio *current;
     Radio *radioListHead;

@@ -30,5 +30,6 @@ CMakeFiles/projet_c.dir/struct_func.c.obj: \
  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_ctype.h \
  E:/MSYS2/mingw64/include/ctype.h \
  E:/wamp64/bin/mariadb/mariadb10.6.5/include/mysql/mariadb_stmt.h \
+ E:\projets\ git\projetC\projetC\settings_func.h \
  E:/MSYS2/mingw64/include/string.h \
  E:/MSYS2/mingw64/include/sec_api/string_s.h

@@ -12,16 +12,24 @@
 #include <string.h>
 #include "miniaudio.h"
 #include "audio_func.h"
+#include "settings_func.h"
 #include "radiofunc.h"
 #include <unistd.h>
 
 
-int radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear){
+int radioInit(MYSQL *mysql,char *radio,Music **front,Music **rear,SETTING *settings){
     char buffer[150];
     MYSQL_ROW row;
     int radioID = getRadioID(mysql,radio);
 
-    snprintf(buffer,150,"SELECT id,name,genre,duration,path FROM music WHERE id IN (SELECT music FROM radio_music WHERE radio = %d) ORDER BY RAND();",radioID);
+    char radioMode[50];
+    strncpy(buffer, settingsGetValue(settings,"radioMode"),50);
+    if(!strcmp(buffer,"random")){
+        snprintf(buffer,150,"SELECT id,name,genre,duration,path FROM music WHERE id IN (SELECT music FROM radio_music WHERE radio = %d) ORDER BY RAND();",radioID);
+    }else{
+        snprintf(buffer,150,"SELECT id,name,genre,duration,path FROM music WHERE id IN (SELECT music FROM radio_music WHERE radio = %d);",radioID);
+    }
+
 
     if(mysql_query(mysql,buffer)){
         dbAddError(mysql);

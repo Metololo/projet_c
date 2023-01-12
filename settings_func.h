@@ -5,14 +5,17 @@
 #ifndef PROJET_C_SETTINGS_FUNC_H
 #define PROJET_C_SETTINGS_FUNC_H
 
-#endif //PROJET_C_SETTINGS_FUNC_H
-#define LINE_MAX_LENGTH 128
-
 typedef struct SETTING{
     char param[30];
     char value[30];
     int line;
 }SETTING;
+
+
+
+#endif //PROJET_C_SETTINGS_FUNC_H
+#define LINE_MAX_LENGTH 128
+
 
 //Return 0 if error or 0 lines found,
 //Or return the number of parameters in settings file.

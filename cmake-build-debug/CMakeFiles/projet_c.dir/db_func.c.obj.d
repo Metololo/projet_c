@@ -38,4 +38,5 @@ CMakeFiles/projet_c.dir/db_func.c.obj: \
  E:/MSYS2/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stddef.h \
  E:/MSYS2/mingw64/include/stddef.h \
  E:\projets\ git\projetC\projetC\radiofunc.h \
- E:\projets\ git\projetC\projetC\structures.h
+ E:\projets\ git\projetC\projetC\structures.h \
+ E:\projets\ git\projetC\projetC\settings_func.h

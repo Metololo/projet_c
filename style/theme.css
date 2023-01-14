@@ -4,6 +4,13 @@
 .coucou{
     color: white;
 }
+.playlist{
+    border: none;
+}
+.playlist-header{
+    padding-bottom: 8px;
+    border-bottom: #E8E8E8 1px solid;
+}
 .button{
     background: none;
     color: inherit;

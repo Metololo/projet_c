@@ -36,6 +36,7 @@ struct Radio{
     Radio *prev;
 };
 
+
 typedef struct DataPLAY{
 
     SETTING *settings;
@@ -45,6 +46,8 @@ typedef struct DataPLAY{
     Radio *radioListTail;
 
     int isSwitching;
+
+    int radioID;
 
     MYSQL *mysql;
     Music **front;

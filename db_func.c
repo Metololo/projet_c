@@ -107,6 +107,7 @@ int dbNewRadio(MYSQL *mysql,char *name,char *genre){
     return 1;
 }
 
+
 int getMusicId(MYSQL *mysql,char *music){
     int musicID;
     char buffer[150];
@@ -128,12 +129,22 @@ int getMusicId(MYSQL *mysql,char *music){
     if(row){
         musicID = atoi(row[0]);
     }else{
-        fprintf(stderr,"NO MUSIC FOUND FOR getRadioID : %s\n",music);
+        fprintf(stderr,"NO MUSIC FOUND FOR getMusicID : %s\n",music);
         return 0;
     }
 
 
     return musicID;
+}
+
+int dbDeleteRadio(MYSQL *mysql,int id){
+    char buffer[50];
+    snprintf(buffer,50,"DELETE FROM radio WHERE id = %d",id);
+    if(mysql_query(mysql,buffer)){
+        fprintf(stderr,"Error when deleting radio");
+        return 0;
+    }
+    return 1;
 }
 
 int dbNewMusic(MYSQL *mysql,ma_engine *engine,char *path,char *name, char *genre,char *radio){

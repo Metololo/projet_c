@@ -13,6 +13,7 @@ void dbAddError(MYSQL *mysql);
 // You can find the SQL scripts for the entire database in /SQL/script.txt
 void dbCreate(MYSQL *mysql);
 
+int dbDeleteRadio(MYSQL *mysql,int id);
 // create new radio, return 1 if sucess or 0 if fail.
 int dbNewRadio(MYSQL *mysql,char *name,char *genre);
 // Add music to database, 1 if sucess or 0 if fail.

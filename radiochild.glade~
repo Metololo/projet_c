@@ -32,7 +32,7 @@
               <object class="GtkLabel" id="radio-name-box">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Rap213429284</property>
+                <property name="label" translatable="yes">NOT FOUD</property>
                 <attributes>
                   <attribute name="font-desc" value="Inter 11"/>
                 </attributes>

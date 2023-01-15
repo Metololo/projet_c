@@ -122,34 +122,7 @@ void radioListInsert(Radio **head,Radio **tail,Radio *radio){
 
 }
 
-int radioListDelete(Radio **head,Radio **tail,int id){
-    Radio *temp = NULL;
-    Radio *temp2 = NULL;
 
-    if(temp->id == id){
-        *head = temp->next;
-        free(temp);
-        return 1;
-    }
-
-    for(temp = *head;temp != *tail;temp=temp->next){
-        if(temp->id == id){
-            if(*head == NULL){
-                return 1;
-            }
-            if(temp == *head && temp == *tail){
-                *head = NULL;
-                *tail = NULL;
-            }else{
-                *head = temp->next;
-                (*tail)->next = *head;
-            }
-            free(temp);
-            return 1;
-        }
-    }
-    return 0;
-}
 
 void radioListDeleteAll(Radio **head,Radio **tail){
     Radio *temp = NULL;

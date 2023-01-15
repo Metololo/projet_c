@@ -139,6 +139,11 @@ int getMusicId(MYSQL *mysql,char *music){
 
 int dbDeleteRadio(MYSQL *mysql,int id){
     char buffer[50];
+    snprintf(buffer,50,"DELETE FROM radio_music WHERE radio = %d",id);
+    if(mysql_query(mysql,buffer)){
+        fprintf(stderr,"Error when deleting radio");
+        return 0;
+    }
     snprintf(buffer,50,"DELETE FROM radio WHERE id = %d",id);
     if(mysql_query(mysql,buffer)){
         fprintf(stderr,"Error when deleting radio");

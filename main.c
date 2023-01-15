@@ -57,9 +57,20 @@ GtkWidget *createRadioButton;
 GtkWidget *nameRadioLabel;
 GtkWidget *genreRadioLabel;
 GtkWidget *radioMenu;
-GtkWidget *musicFlowbox;
+GtkWidget *musicFlowBox;
 GtkWidget *cancelCreate1;
 GtkWidget *deleteRadioButton;
+GtkWidget *musicPlaylist;
+GtkWidget *musicPlaylistFlow;
+GtkWidget *musicPlaylistButton;
+GtkWidget *leaveMusic;
+GtkWidget *newMusic;
+GtkWidget *addMusicWindow;
+GtkWidget *createMusicButton;
+GtkWidget *selectMusicFile;
+GtkWidget *errorMsg;
+GtkWidget *nameRadioAdd;
+GtkWidget *genreRadioAdd;
 
 
 
@@ -81,6 +92,10 @@ void validateRadio(GtkButton *b,gpointer data);
 void deleteRadio(GtkButton *b,gpointer data);
 void radioPlaylist(GtkButton *b,gpointer data);
 void addChild(MYSQL_ROW row,DataPLAY *list);
+void deleteMusicRadio(GtkButton *b,gpointer data);
+void goMusicList(GtkButton *b,gpointer data);
+void addMusic(GtkButton *b,gpointer data);
+void validateMusicAdd(GtkButton *b,gpointer data);
 
 int main(int argc,char **argv) {
 
@@ -250,25 +265,40 @@ int main(int argc,char **argv) {
     nameRadioLabel = GTK_WIDGET(gtk_builder_get_object(builder, "name-radio-label"));
     genreRadioLabel = GTK_WIDGET(gtk_builder_get_object(builder, "genre-radio-label"));
     radioMenu = GTK_WIDGET(gtk_builder_get_object(builder, "radio-playlist"));
-    musicFlowbox = GTK_WIDGET(gtk_builder_get_object(builder, "music-flowbox"));
+    musicFlowBox = GTK_WIDGET(gtk_builder_get_object(builder, "music-flowbox"));
     cancelCreate1 = GTK_WIDGET(gtk_builder_get_object(builder, "cancel-create1"));
     deleteRadioButton = GTK_WIDGET(gtk_builder_get_object(builder, "delete-radio"));
+    musicPlaylist = GTK_WIDGET(gtk_builder_get_object(builder, "music-playlist"));
+    musicPlaylistFlow = GTK_WIDGET(gtk_builder_get_object(builder, "music-flowbox1"));
+    musicPlaylistButton = GTK_WIDGET(gtk_builder_get_object(builder, "go-music"));
+    leaveMusic = GTK_WIDGET(gtk_builder_get_object(builder, "cancel-music"));
+    newMusic = GTK_WIDGET(gtk_builder_get_object(builder, "new-music"));
+    addMusicWindow = GTK_WIDGET(gtk_builder_get_object(builder, "add-music"));
+    createMusicButton = GTK_WIDGET(gtk_builder_get_object(builder, "create-music-button"));
+    selectMusicFile = GTK_WIDGET(gtk_builder_get_object(builder, "select-music-file"));
+    errorMsg = GTK_WIDGET(gtk_builder_get_object(builder, "error-msg"));
+    nameRadioAdd = GTK_WIDGET(gtk_builder_get_object(builder, "name-radio-add"));
+    genreRadioAdd = GTK_WIDGET(gtk_builder_get_object(builder, "name-radio-genre"));
 
+    gtk_widget_set_visible(errorMsg,FALSE);
 
     g_signal_connect(next_radio, "clicked", G_CALLBACK(next_radio_clicked), &radioData);
     g_signal_connect(prev_radio, "clicked", G_CALLBACK(prev_radio_clicked), &radioData);
-    g_signal_connect(pauseButton, "clicked", G_CALLBACK(pauseSound), &radioData);
     g_signal_connect(pauseButton, "clicked", G_CALLBACK(pauseSound), &radioData);
     g_signal_connect(buttonSettings, "clicked", G_CALLBACK(goSettings), &radioData);
     g_signal_connect(leaveSettings, "clicked", G_CALLBACK(exitSettings),&radioData);
     g_signal_connect(likeButton, "clicked", G_CALLBACK(likeApp), NULL);
     g_signal_connect(burgerMenu, "toggled", G_CALLBACK(openMusic),&radioData);
     g_signal_connect(musicWindow, "delete-event", G_CALLBACK(hide_window_music), NULL);
-    g_signal_connect(radioManage, "clicked", G_CALLBACK(addChild), NULL);
+    g_signal_connect(radioManage, "clicked", G_CALLBACK(goMusicStack), &radioData);
     g_signal_connect(cancelCreate, "clicked", G_CALLBACK(goMusicStack), &radioData);
     g_signal_connect(cancelCreate1, "clicked", G_CALLBACK(goMusicStack), &radioData);
     g_signal_connect(createRadioButton, "clicked", G_CALLBACK(validateRadio), &radioData);
     g_signal_connect(deleteRadioButton, "clicked", G_CALLBACK(deleteRadio), &radioData);
+    g_signal_connect(musicPlaylistButton, "clicked", G_CALLBACK(goMusicList), &radioData);
+    g_signal_connect(leaveMusic, "clicked", G_CALLBACK(goMusicStack), &radioData);
+    g_signal_connect(newMusic, "clicked", G_CALLBACK(addMusic), &radioData);
+    g_signal_connect(createMusicButton, "clicked", G_CALLBACK(validateMusicAdd), &radioData);
 
 
 
@@ -312,15 +342,154 @@ int main(int argc,char **argv) {
  * -------------------------------------------
  */
 
+void validateMusicAdd(GtkButton *b,gpointer data){
+    gtk_widget_set_visible(errorMsg,FALSE);
+    DataPLAY *list = (DataPLAY *) data;
+
+    GFile *file = gtk_file_chooser_get_file(GTK_FILE_CHOOSER(selectMusicFile));
+    if(file == NULL){
+        fprintf(stderr,"N0 FILE");
+        return;
+    }
+
+    GFileInfo *info = g_file_query_info(file, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE, G_FILE_QUERY_INFO_NONE, NULL, NULL);
+    const gchar *content_type = g_file_info_get_content_type(info);
+
+    char buffer[500];
+    char *position;
+
+    char name[101] = "no name";
+    char genre[31] = "no genre";
+
+   strncpy(buffer, g_file_get_path(file),500);
+    printf("\n%s\n",buffer);
+
+    for(int i=0;buffer[i] != '\0';++i){
+        if(buffer[i] == '\\'){
+            buffer[i] = '/';
+        }
+    }
+
+    if(strcmp(content_type,".mp3")){
+        gtk_widget_set_visible(errorMsg,TRUE);
+        return;
+    }
+
+
+
+    if(strlen(gtk_entry_get_text(GTK_ENTRY(nameRadioAdd))) != 0){
+        strncpy(name,gtk_entry_get_text(GTK_ENTRY(nameRadioAdd)),101);
+    }
+
+    if(strlen(gtk_entry_get_text(GTK_ENTRY(genreRadioAdd))) != 0){
+        strncpy(genre,gtk_entry_get_text(GTK_ENTRY(genreRadioAdd)),31);
+    }
+
+    dbNewMusic(list->mysql,list->engine, buffer,name,genre,NULL);
+}
+
+void addMusic(GtkButton *b,gpointer data){
+    gtk_widget_show(addMusicWindow);
+}
+
+void deleteMusic(GtkButton *b,gpointer data){
+    DataPLAY *infos = (DataPLAY *) data;
+    MYSQL *mysql = infos->mysql;
+    int musicID = atoi(gtk_widget_get_name(GTK_WIDGET(b)));
+
+    char buffer[100];
+    snprintf(buffer,100,"DELETE FROM radio_music WHERE music=%d",musicID);
+
+    if(mysql_query(mysql,buffer)){
+        dbAddError(mysql);
+    }
+
+    snprintf(buffer,100,"DELETE FROM music WHERE id=%d",musicID);
+
+    if(mysql_query(mysql,buffer)){
+        dbAddError(mysql);
+    }
+
+    gtk_container_foreach(GTK_CONTAINER(musicFlowBox),(GtkCallback) gtk_widget_destroy,NULL);
+    goMusicList(NULL,infos);
+
+}
+
+void addMusicListChild(DataPLAY *list,MYSQL_ROW row){
+
+    builder =  gtk_builder_new_from_file("../musicItem.glade");
+    GtkWidget *Item = GTK_WIDGET(gtk_builder_get_object(builder,"radio-playlist-music"));
+    GtkWidget *songID = GTK_WIDGET(gtk_builder_get_object(builder,"song-id"));
+    GtkWidget *songName = GTK_WIDGET(gtk_builder_get_object(builder,"song-name"));
+    GtkWidget *songGenre = GTK_WIDGET(gtk_builder_get_object(builder,"song-genre"));
+    GtkWidget *songDuration = GTK_WIDGET(gtk_builder_get_object(builder,"song-duration"));
+    GtkWidget *deletion =  GTK_WIDGET(gtk_builder_get_object(builder,"deletion"));
+
+    gtk_widget_set_name(deletion,row[0]);
+    g_signal_connect(deletion, "activate", G_CALLBACK(deleteMusic),list);
+
+    char buffer[20];
+
+    soundFormatTime(buffer,20,atof(row[3]));
+
+    gtk_label_set_text(GTK_LABEL(songID),row[0]);
+    gtk_label_set_text(GTK_LABEL(songName),row[1]);
+    gtk_label_set_text(GTK_LABEL(songGenre),row[2]);
+    gtk_label_set_text(GTK_LABEL(songDuration),buffer);
+
+    gtk_flow_box_insert(GTK_FLOW_BOX(musicPlaylistFlow),Item,-1);
+
+    g_object_unref(builder);
+}
+
+void goMusicList(GtkButton *b,gpointer data){
+    gtk_container_foreach(GTK_CONTAINER(musicPlaylistFlow),(GtkCallback) gtk_widget_destroy,NULL);
+    gtk_stack_set_visible_child(GTK_STACK(musicStack),musicPlaylist);
+
+    DataPLAY *infos = (DataPLAY *) data;
+    MYSQL *mysql = infos->mysql;
+    MYSQL_RES *res;
+    MYSQL_ROW row;
+
+    char widgetName[40];
+    if(b != NULL){
+        strncpy(widgetName,gtk_widget_get_name(GTK_WIDGET(b)),40);
+    }
+
+
+    if(mysql_query(mysql,"SELECT id,name,genre,duration FROM music")){
+        dbAddError(mysql);
+        return;
+    }
+    res = mysql_store_result(mysql);
+    if(res == NULL){
+        dbAddError(mysql);
+        return;
+    }
+
+    if(mysql_num_rows(res) == 0){
+        fprintf(stderr,"no sound");
+        mysql_free_result(res);
+        gtk_stack_set_visible_child((GtkStack *)musicStack,musicPlaylist);
+        return;
+    }
+
+    while((row = mysql_fetch_row(res))){
+        addMusicListChild(infos,row);
+    }
+    mysql_free_result(res);
+
+    gtk_stack_set_visible_child((GtkStack *)musicStack,musicPlaylist);
+
+}
+
 void deleteRadio(GtkButton *b,gpointer data){
     DataPLAY *infos = (DataPLAY *) data;
     MYSQL *mysql = infos->mysql;
     int radioID = infos->radioID;
     Radio *head = infos->radioListHead;
     Radio *temp = head;
-    while(temp->id != radioID){
-        temp = temp->next;
-    }
+
     Radio *tail = infos->radioListTail;
 
     if(dbDeleteRadio(mysql,radioID) == 0){
@@ -332,6 +501,10 @@ void deleteRadio(GtkButton *b,gpointer data){
     }
     if(head == NULL){
         return;
+    }
+
+    while(temp->id != radioID){
+        temp = temp->next;
     }
 
     if(head == tail){
@@ -372,8 +545,9 @@ void validateRadio(GtkButton *b,gpointer data){
 
 void goMusicStack(GtkButton *b,gpointer data){
     DataPLAY *infos = (DataPLAY *) data;
-    gtk_container_foreach(GTK_CONTAINER(musicFlowbox),(GtkCallback) gtk_widget_destroy,NULL);
+    gtk_container_foreach(GTK_CONTAINER(musicFlowBox),(GtkCallback) gtk_widget_destroy,NULL);
     gtk_container_foreach(GTK_CONTAINER(radioBox),(GtkCallback) gtk_widget_destroy,NULL);
+    gtk_container_foreach(GTK_CONTAINER(musicPlaylistFlow),(GtkCallback) gtk_widget_destroy,NULL);
     openMusic(NULL,infos);
     gtk_stack_set_visible_child((GtkStack *)musicStack,musicStack1);
 
@@ -383,7 +557,26 @@ void goCreateRadio(GtkButton *b,gpointer data){
     gtk_stack_set_visible_child((GtkStack *)musicStack,newRadioPage);
 }
 
-void addPlaylistChild(MYSQL_ROW row){
+void deleteMusicRadio(GtkButton *b,gpointer data){
+    DataPLAY *infos = (DataPLAY *) data;
+    MYSQL *mysql = infos->mysql;
+    int radioID = infos->radioID;
+    int musicID = atoi(gtk_widget_get_name(GTK_WIDGET(b)));
+    char buffer[100];
+    Music *temp = *infos->front;
+    Music *currentSong = *infos->front;
+    snprintf(buffer,100,"DELETE FROM radio_music WHERE music=%d AND radio=%d",musicID,radioID);
+
+    if(mysql_query(mysql,buffer)){
+        dbAddError(mysql);
+    }
+
+    gtk_container_foreach(GTK_CONTAINER(musicFlowBox),(GtkCallback) gtk_widget_destroy,NULL);
+    radioPlaylist(NULL,infos);
+
+}
+
+void addPlaylistChild(DataPLAY *list,MYSQL_ROW row){
 
     builder =  gtk_builder_new_from_file("../musicItem.glade");
     GtkWidget *Item = GTK_WIDGET(gtk_builder_get_object(builder,"radio-playlist-music"));
@@ -391,6 +584,10 @@ void addPlaylistChild(MYSQL_ROW row){
     GtkWidget *songName = GTK_WIDGET(gtk_builder_get_object(builder,"song-name"));
     GtkWidget *songGenre = GTK_WIDGET(gtk_builder_get_object(builder,"song-genre"));
     GtkWidget *songDuration = GTK_WIDGET(gtk_builder_get_object(builder,"song-duration"));
+    GtkWidget *deletion =  GTK_WIDGET(gtk_builder_get_object(builder,"deletion"));
+
+    gtk_widget_set_name(deletion,row[0]);
+    g_signal_connect(deletion, "activate", G_CALLBACK(deleteMusicRadio),list);
 
     char buffer[20];
 
@@ -401,7 +598,7 @@ void addPlaylistChild(MYSQL_ROW row){
     gtk_label_set_text(GTK_LABEL(songGenre),row[2]);
     gtk_label_set_text(GTK_LABEL(songDuration),buffer);
 
-    gtk_flow_box_insert(GTK_FLOW_BOX(musicFlowbox),Item,-1);
+    gtk_flow_box_insert(GTK_FLOW_BOX(musicFlowBox),Item,-1);
 
     g_object_unref(builder);
 }
@@ -415,21 +612,27 @@ void radioPlaylist(GtkButton *b,gpointer data){
     int radioID;
     char widgetName[40];
     char buffer[150];
-    strncpy(widgetName,gtk_widget_get_name(GTK_WIDGET(b)),40);
+    if(b != NULL){
+        strncpy(widgetName,gtk_widget_get_name(GTK_WIDGET(b)),40);
 
-    char *pos = strchr(widgetName,'-');
-    if(pos != NULL){
-        radioID = atoi(pos+1);
+        char *pos = strchr(widgetName,'-');
+        if(pos != NULL){
+            radioID = atoi(pos+1);
+        }
+        infos->radioID = radioID;
+
+    }else{
+        radioID = infos->radioID;
     }
-    infos->radioID = radioID;
-    printf("*TEST*");
+
+
+
     snprintf(buffer,150,"SELECT id,name,genre,duration FROM music WHERE id IN (SELECT music FROM radio_music WHERE radio = %d)",radioID);
 
     if(mysql_query(mysql,buffer)){
         dbAddError(mysql);
         return;
     }
-    printf("*TEST*");
     res = mysql_store_result(mysql);
     if(res == NULL){
         dbAddError(mysql);
@@ -444,7 +647,8 @@ void radioPlaylist(GtkButton *b,gpointer data){
     }
 
     while((row = mysql_fetch_row(res))){
-        addPlaylistChild(row);
+        printf("\n--%p--\n",data);
+        addPlaylistChild(infos,row);
     }
     mysql_free_result(res);
 
@@ -628,7 +832,6 @@ int radioChange(DataPLAY *list,int move){
 }
 
 void pauseSound(GtkButton *b, gpointer user_data){
-
     DataPLAY *infos = (DataPLAY *) user_data;
     infos->wantToPause = 1;
 
@@ -699,6 +902,7 @@ gboolean test(gpointer data){
 
     if(!infos->isPlaying && infos->isPaused && infos->wantToPause){
         result = ma_sound_init_from_file(engine,currentSong->path, 0, NULL, NULL, sound);
+
         ma_sound_set_volume(infos->sound,(float)infos->volume);
         infos->soundInitialized = 1;
         if (result != MA_SUCCESS) {

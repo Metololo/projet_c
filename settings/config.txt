@@ -1,8 +1,47 @@
 #commentaire blablaablaabl
 
 defaultVolume:6
-radioMode:normal
+radioMode:random
 radioFinish:replay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

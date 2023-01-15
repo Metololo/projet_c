@@ -2,6 +2,18 @@
 <!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.12"/>
+  <object class="GtkMenu" id="music-choice">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <child>
+      <object class="GtkMenuItem">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="label" translatable="yes">supprimer la musique de la playlist</property>
+        <property name="use-underline">True</property>
+      </object>
+    </child>
+  </object>
   <object class="GtkFlowBoxChild" id="radio-playlist-music">
     <property name="visible">True</property>
     <property name="can-focus">True</property>
@@ -85,6 +97,7 @@
             <property name="can-focus">True</property>
             <property name="focus-on-click">False</property>
             <property name="receives-default">True</property>
+            <property name="popup">music-choice</property>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>

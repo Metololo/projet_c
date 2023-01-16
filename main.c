@@ -370,7 +370,6 @@ void addMusicToRadio(GtkButton *b,gpointer data){
         dbAddError(mysql);
         return;
     }
-    printf("%d : %d\n",musicID,radioID);
 
     gtk_widget_destroy(GTK_WIDGET(b));
 }
@@ -411,7 +410,6 @@ void addMusicMenu(GtkButton *b,gpointer data) {
 
 
     char buffer[130];
-    printf("%d",radioID);
     snprintf(buffer, 130,
              "SELECT id,name,genre,duration FROM music WHERE id NOT IN ( SELECT music FROM radio_music WHERE radio = %d)",
              radioID);
@@ -468,7 +466,7 @@ void validateMusicAdd(GtkButton *b,gpointer data){
     char genre[31] = "no genre";
 
    strncpy(buffer, g_file_get_path(file),500);
-    printf("\n%s\n",buffer);
+
 
     for(int i=0;buffer[i] != '\0';++i){
         if(buffer[i] == '\\'){
@@ -758,7 +756,6 @@ void radioPlaylist(GtkButton *b,gpointer data){
     }
 
     while((row = mysql_fetch_row(res))){
-        printf("\n--%p--\n",data);
         addPlaylistChild(infos,row);
     }
     mysql_free_result(res);
@@ -790,7 +787,6 @@ void addChild(MYSQL_ROW row,DataPLAY *list){
 }
 
 gboolean hide_newMusic_window(GtkWidget *widget){
-    printf("ok");
     gtk_widget_hide(widget);
     return TRUE;
 }
@@ -1048,7 +1044,6 @@ gboolean test(gpointer data){
 
     if(infos->isPlaying && infos->isPaused && infos->wantToPause){
 
-        printf("%lld - %lld",infos->pauseTime,infos->totalPauseTime);
         soundPlay(sound,&infos->pauseTime,&infos->totalPauseTime);
         infos->isPaused = 0;
         infos->wantToPause = 0;
@@ -1069,7 +1064,6 @@ gboolean test(gpointer data){
         ma_sound_set_volume(infos->sound,(float)infos->volume);
 
         if(ma_sound_at_end(sound)){
-            printf("FIN DU SON !! ");
 
             infos->isPlaying = 0;
             infos->pauseTime = 0;

@@ -2,18 +2,6 @@
 <!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.12"/>
-  <object class="GtkMenu" id="music-choice">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <child>
-      <object class="GtkMenuItem" id="deletion">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="label" translatable="yes">supprimer la musique de la radio</property>
-        <property name="use-underline">True</property>
-      </object>
-    </child>
-  </object>
   <object class="GtkFlowBoxChild" id="radio-playlist-music">
     <property name="visible">True</property>
     <property name="can-focus">True</property>
@@ -28,7 +16,7 @@
             <property name="width-request">30</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">123</property>
+            <property name="label" translatable="yes">0</property>
             <property name="max-width-chars">4</property>
             <attributes>
               <attribute name="font-desc" value="Inter Medium 11"/>
@@ -45,7 +33,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="valign">center</property>
-            <property name="label" translatable="yes">Super song Cool - Maria Carti</property>
+            <property name="label" translatable="yes">Name</property>
             <property name="max-width-chars">100</property>
             <attributes>
               <attribute name="font-desc" value="Inter Medium 11"/>
@@ -62,7 +50,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="valign">center</property>
-            <property name="label" translatable="yes">Rap &amp; Pop &amp; Smoke &amp; lol</property>
+            <property name="label" translatable="yes">genre</property>
             <property name="max-width-chars">30</property>
             <attributes>
               <attribute name="font-desc" value="Inter Medium 11"/>
@@ -79,7 +67,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="valign">center</property>
-            <property name="label" translatable="yes">10:40</property>
+            <property name="label" translatable="yes">0:00</property>
             <property name="max-width-chars">5</property>
             <attributes>
               <attribute name="font-desc" value="Inter Medium 12"/>
@@ -92,26 +80,21 @@
           </packing>
         </child>
         <child>
-          <object class="GtkMenuButton">
+          <object class="GtkButton" id="add-in-radio-button">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
-            <property name="focus-on-click">False</property>
             <property name="receives-default">True</property>
-            <property name="popup">music-choice</property>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="pixbuf">images\options.png</property>
+                <property name="pixbuf">images\plus-circle.png</property>
               </object>
             </child>
-            <style>
-              <class name="button"/>
-            </style>
           </object>
           <packing>
-            <property name="x">950</property>
-            <property name="y">5</property>
+            <property name="x">955</property>
+            <property name="y">8</property>
           </packing>
         </child>
       </object>
